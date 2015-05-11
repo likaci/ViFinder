@@ -1,0 +1,422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		834325491B0093DA00301A74 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 834325481B0093DA00301A74 /* AppDelegate.m */; };
+		8343254B1B0093DA00301A74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343254A1B0093DA00301A74 /* main.m */; };
+		8343254E1B0093DA00301A74 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343254D1B0093DA00301A74 /* ViewController.m */; };
+		834325501B0093DA00301A74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8343254F1B0093DA00301A74 /* Images.xcassets */; };
+		834325531B0093DA00301A74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834325511B0093DA00301A74 /* Main.storyboard */; };
+		8343255F1B0093DB00301A74 /* ViFinderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343255E1B0093DB00301A74 /* ViFinderTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		834325591B0093DB00301A74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8343253A1B0093DA00301A74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 834325411B0093DA00301A74;
+			remoteInfo = ViFinder;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		834325421B0093DA00301A74 /* ViFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		834325461B0093DA00301A74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		834325471B0093DA00301A74 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		834325481B0093DA00301A74 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8343254A1B0093DA00301A74 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8343254C1B0093DA00301A74 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8343254D1B0093DA00301A74 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8343254F1B0093DA00301A74 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		834325521B0093DA00301A74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		834325581B0093DB00301A74 /* ViFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8343255D1B0093DB00301A74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8343255E1B0093DB00301A74 /* ViFinderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViFinderTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8343253F1B0093DA00301A74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		834325551B0093DB00301A74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		834325391B0093DA00301A74 = {
+			isa = PBXGroup;
+			children = (
+				834325441B0093DA00301A74 /* ViFinder */,
+				8343255B1B0093DB00301A74 /* ViFinderTests */,
+				834325431B0093DA00301A74 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		834325431B0093DA00301A74 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				834325421B0093DA00301A74 /* ViFinder.app */,
+				834325581B0093DB00301A74 /* ViFinderTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		834325441B0093DA00301A74 /* ViFinder */ = {
+			isa = PBXGroup;
+			children = (
+				834325471B0093DA00301A74 /* AppDelegate.h */,
+				834325481B0093DA00301A74 /* AppDelegate.m */,
+				8343254C1B0093DA00301A74 /* ViewController.h */,
+				8343254D1B0093DA00301A74 /* ViewController.m */,
+				8343254F1B0093DA00301A74 /* Images.xcassets */,
+				834325511B0093DA00301A74 /* Main.storyboard */,
+				834325451B0093DA00301A74 /* Supporting Files */,
+			);
+			path = ViFinder;
+			sourceTree = "<group>";
+		};
+		834325451B0093DA00301A74 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				834325461B0093DA00301A74 /* Info.plist */,
+				8343254A1B0093DA00301A74 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8343255B1B0093DB00301A74 /* ViFinderTests */ = {
+			isa = PBXGroup;
+			children = (
+				8343255E1B0093DB00301A74 /* ViFinderTests.m */,
+				8343255C1B0093DB00301A74 /* Supporting Files */,
+			);
+			path = ViFinderTests;
+			sourceTree = "<group>";
+		};
+		8343255C1B0093DB00301A74 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8343255D1B0093DB00301A74 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		834325411B0093DA00301A74 /* ViFinder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 834325621B0093DB00301A74 /* Build configuration list for PBXNativeTarget "ViFinder" */;
+			buildPhases = (
+				8343253E1B0093DA00301A74 /* Sources */,
+				8343253F1B0093DA00301A74 /* Frameworks */,
+				834325401B0093DA00301A74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ViFinder;
+			productName = ViFinder;
+			productReference = 834325421B0093DA00301A74 /* ViFinder.app */;
+			productType = "com.apple.product-type.application";
+		};
+		834325571B0093DB00301A74 /* ViFinderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 834325651B0093DB00301A74 /* Build configuration list for PBXNativeTarget "ViFinderTests" */;
+			buildPhases = (
+				834325541B0093DB00301A74 /* Sources */,
+				834325551B0093DB00301A74 /* Frameworks */,
+				834325561B0093DB00301A74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8343255A1B0093DB00301A74 /* PBXTargetDependency */,
+			);
+			name = ViFinderTests;
+			productName = ViFinderTests;
+			productReference = 834325581B0093DB00301A74 /* ViFinderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8343253A1B0093DA00301A74 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = likaci;
+				TargetAttributes = {
+					834325411B0093DA00301A74 = {
+						CreatedOnToolsVersion = 6.3;
+					};
+					834325571B0093DB00301A74 = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = 834325411B0093DA00301A74;
+					};
+				};
+			};
+			buildConfigurationList = 8343253D1B0093DA00301A74 /* Build configuration list for PBXProject "ViFinder" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 834325391B0093DA00301A74;
+			productRefGroup = 834325431B0093DA00301A74 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				834325411B0093DA00301A74 /* ViFinder */,
+				834325571B0093DB00301A74 /* ViFinderTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		834325401B0093DA00301A74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				834325501B0093DA00301A74 /* Images.xcassets in Resources */,
+				834325531B0093DA00301A74 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		834325561B0093DB00301A74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8343253E1B0093DA00301A74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8343254E1B0093DA00301A74 /* ViewController.m in Sources */,
+				8343254B1B0093DA00301A74 /* main.m in Sources */,
+				834325491B0093DA00301A74 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		834325541B0093DB00301A74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8343255F1B0093DB00301A74 /* ViFinderTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8343255A1B0093DB00301A74 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 834325411B0093DA00301A74 /* ViFinder */;
+			targetProxy = 834325591B0093DB00301A74 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		834325511B0093DA00301A74 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				834325521B0093DA00301A74 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		834325601B0093DB00301A74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		834325611B0093DB00301A74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		834325631B0093DB00301A74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ViFinder/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		834325641B0093DB00301A74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ViFinder/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		834325661B0093DB00301A74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ViFinderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ViFinder.app/Contents/MacOS/ViFinder";
+			};
+			name = Debug;
+		};
+		834325671B0093DB00301A74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ViFinderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ViFinder.app/Contents/MacOS/ViFinder";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8343253D1B0093DA00301A74 /* Build configuration list for PBXProject "ViFinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				834325601B0093DB00301A74 /* Debug */,
+				834325611B0093DB00301A74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		834325621B0093DB00301A74 /* Build configuration list for PBXNativeTarget "ViFinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				834325631B0093DB00301A74 /* Debug */,
+				834325641B0093DB00301A74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		834325651B0093DB00301A74 /* Build configuration list for PBXNativeTarget "ViFinderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				834325661B0093DB00301A74 /* Debug */,
+				834325671B0093DB00301A74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8343253A1B0093DA00301A74 /* Project object */;
+}
