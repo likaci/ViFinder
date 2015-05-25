@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		834325491B0093DA00301A74 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 834325481B0093DA00301A74 /* AppDelegate.m */; };
 		8343254B1B0093DA00301A74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343254A1B0093DA00301A74 /* main.m */; };
-		8343254E1B0093DA00301A74 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343254D1B0093DA00301A74 /* ViewController.m */; };
+		8343254E1B0093DA00301A74 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343254D1B0093DA00301A74 /* FileViewController.m */; };
 		834325501B0093DA00301A74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8343254F1B0093DA00301A74 /* Images.xcassets */; };
 		834325531B0093DA00301A74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834325511B0093DA00301A74 /* Main.storyboard */; };
 		8343255F1B0093DB00301A74 /* ViFinderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343255E1B0093DB00301A74 /* ViFinderTests.m */; };
@@ -31,8 +31,8 @@
 		834325471B0093DA00301A74 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		834325481B0093DA00301A74 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8343254A1B0093DA00301A74 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8343254C1B0093DA00301A74 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8343254D1B0093DA00301A74 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8343254C1B0093DA00301A74 /* FileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
+		8343254D1B0093DA00301A74 /* FileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileViewController.m; sourceTree = "<group>"; };
 		8343254F1B0093DA00301A74 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		834325521B0093DA00301A74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		834325581B0093DB00301A74 /* ViFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,8 +81,8 @@
 			children = (
 				834325471B0093DA00301A74 /* AppDelegate.h */,
 				834325481B0093DA00301A74 /* AppDelegate.m */,
-				8343254C1B0093DA00301A74 /* ViewController.h */,
-				8343254D1B0093DA00301A74 /* ViewController.m */,
+				8343254C1B0093DA00301A74 /* FileViewController.h */,
+				8343254D1B0093DA00301A74 /* FileViewController.m */,
 				8343254F1B0093DA00301A74 /* Images.xcassets */,
 				834325511B0093DA00301A74 /* Main.storyboard */,
 				834325451B0093DA00301A74 /* Supporting Files */,
@@ -215,7 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8343254E1B0093DA00301A74 /* ViewController.m in Sources */,
+				8343254E1B0093DA00301A74 /* FileViewController.m in Sources */,
 				8343254B1B0093DA00301A74 /* main.m in Sources */,
 				834325491B0093DA00301A74 /* AppDelegate.m in Sources */,
 			);

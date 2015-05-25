@@ -1,14 +1,14 @@
 //
-//  ViewController.m
+//  FileViewController.m
 //  ViFinder
 //
 //  Created by liuwencai on 15/5/11.
 //  Copyright (c) 2015年 likaci. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "FileViewController.h"
 
-@implementation ViewController {
+@implementation FileViewController {
 @private
     NSTableView *_fileTableView;
 }

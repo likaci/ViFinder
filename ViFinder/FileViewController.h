@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  FileViewController.h
 //  ViFinder
 //
 //  Created by liuwencai on 15/5/11.
@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController <NSTableViewDataSource>
+@interface FileViewController : NSViewController <NSTableViewDataSource>
 @property (strong) IBOutlet NSTableView *fileTableView;
 
 
