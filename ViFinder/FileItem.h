@@ -10,11 +10,9 @@
 
 @interface FileItem : NSObject
 @property NSString *name;
-@property NSString *icon;
+@property BOOL isDirectiory;
+@property NSString *ext;
 
-- (instancetype)initWithName:(NSString *)name icon:(NSString *)icon;
-
-+ (instancetype)itemWithName:(NSString *)name icon:(NSString *)icon;
-
++ (instancetype)itemWithFileAttribute:(NSDictionary *)aFileAttribute name:(NSString *)name;
 
 @end

@@ -8,20 +8,24 @@
 
 #import "FileItem.h"
 
-@implementation FileItem
+@implementation FileItem {
+    NSDictionary *fileAttribute;
+}
 
-- (instancetype)initWithName:(NSString *)name icon:(NSString *)icon {
+- (instancetype)initWithFileAttribute:(NSDictionary *)aFileAttribute name:(NSString *)name {
     self = [super init];
     if (self) {
+        fileAttribute = aFileAttribute;
         self.name = name;
-        self.icon = icon;
+        self.isDirectiory = [[aFileAttribute valueForKey:@"NSFileType"] isEqualToString:NSFileTypeDirectory];
+        self.ext = self.isDirectiory ? @"Dir" : [name pathExtension];
     }
 
     return self;
 }
 
-+ (instancetype)itemWithName:(NSString *)name icon:(NSString *)icon {
-    return [[self alloc] initWithName:name icon:icon];
++ (instancetype)itemWithFileAttribute:(NSDictionary *)aFileAttribute name:(NSString *)name {
+    return [[self alloc] initWithFileAttribute:aFileAttribute name:name];
 }
 
 

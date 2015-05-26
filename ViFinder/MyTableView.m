@@ -57,8 +57,13 @@
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     FileItem *item = fileArray[row];
     if ([[tableColumn identifier] isEqualToString:@"icon"]) {
-        NSImage *folderIcon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)];
-        return folderIcon;
+        NSImage *icon;
+        if (item.isDirectiory) {
+            icon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)];
+        } else {
+            icon = [[NSWorkspace sharedWorkspace] iconForFileType:item.ext];
+        }
+        return icon;
     } else {
         return [item valueForKey:[tableColumn identifier]];
     }
@@ -74,7 +79,7 @@
         [self selectRowIndexes:indexSet byExtendingSelection:false];
     }
     if (theEvent.keyCode == kVK_Return) {
-        NSString *dir = fileArray[(NSUInteger) self.selectedRow];
+        NSString *dir = [fileArray[(NSUInteger) self.selectedRow] valueForKey:@"name"];
         if ([currentPath isEqualToString:@"/"]) {
             currentPath = @"";
         }
@@ -88,16 +93,20 @@
 }
 
 - (void)showPath:(NSString *)path {
-    [fileArray removeAllObjects];
-    for (NSString *name in [self getFileListAtPath:path]) {
-        [fileArray addObject:[FileItem itemWithName:name icon:@"123"]];
-    }
-    //fileArray = [[self getFileListAtPath:path] mutableCopy];
+    fileArray = [[self getFileListAtPath:path] mutableCopy];
     [self reloadData];
 }
 
 - (NSArray *)getFileListAtPath:(NSString *)path {
-    return [fileManager contentsOfDirectoryAtPath:path error:nil];
+    NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtPath:path];
+    NSMutableArray *fileList = [[NSMutableArray alloc] init];
+    NSString *name;
+    while ((name = enumerator.nextObject) != nil) {
+        [enumerator skipDescendants];
+        FileItem *item = [FileItem itemWithFileAttribute:enumerator.fileAttributes name:name];
+        [fileList addObject:item];
+    }
+    return fileList;
 }
 
 - (void)drawRow:(NSInteger)row clipRect:(NSRect)clipRect {
