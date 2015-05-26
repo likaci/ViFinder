@@ -7,12 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Quartz/Quartz.h>
 
-@interface FileItem : NSObject
+@interface FileItem : NSObject <QLPreviewItem>
 @property NSString *name;
 @property BOOL isDirectiory;
 @property NSString *ext;
+@property NSURL *previewItemURL;
+@property NSString *path;
 
-+ (instancetype)itemWithFileAttribute:(NSDictionary *)aFileAttribute name:(NSString *)name;
+- (instancetype)initWithName:(NSString *)name fileAttribute:(NSDictionary *)aFileAttribute path:(NSString *)path;
+
++ (instancetype)itemWithName:(NSString *)name fileAttribute:(NSDictionary *)aFileAttribute path:(NSString *)path;
+
 
 @end

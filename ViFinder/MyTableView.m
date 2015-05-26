@@ -38,18 +38,6 @@
     // Drawing code here.
 }
 
-- (BOOL)acceptsFirstResponder {
-    return YES;
-}
-
-- (BOOL)becomeFirstResponder {
-    return YES;
-}
-
-- (BOOL)resignFirstResponder {
-    return YES;
-}
-
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     return fileArray.count;
 }
@@ -90,6 +78,15 @@
         currentPath = [currentPath stringByDeletingLastPathComponent];
         [self showPath:currentPath];
     }
+    if (theEvent.keyCode == kVK_Space) {
+        if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
+            [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
+        }
+        else {
+            [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:nil];
+        }
+
+    }
 }
 
 - (void)showPath:(NSString *)path {
@@ -103,7 +100,7 @@
     NSString *name;
     while ((name = enumerator.nextObject) != nil) {
         [enumerator skipDescendants];
-        FileItem *item = [FileItem itemWithFileAttribute:enumerator.fileAttributes name:name];
+        FileItem *item = [FileItem itemWithName:name fileAttribute:enumerator.fileAttributes path:currentPath];
         [fileList addObject:item];
     }
     return fileList;
@@ -114,6 +111,26 @@
     [color setFill];
     NSRectFill([self rectOfRow:row]);
     [super drawRow:row clipRect:clipRect];
+}
+
+
+- (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel {
+    return YES;
+}
+
+- (void)beginPreviewPanelControl:(QLPreviewPanel *)panel {
+    panel.dataSource = self;
+}
+
+- (void)endPreviewPanelControl:(QLPreviewPanel *)panel {
+}
+
+- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel {
+    return 1;
+}
+
+- (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
+    return fileArray[self.selectedRow];
 }
 
 @end

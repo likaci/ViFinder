@@ -8,7 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Carbon/Carbon.h>
+#import <Quartz/Quartz.h>
 
-@interface MyTableView : NSTableView <NSTableViewDataSource>
+@interface MyTableView : NSTableView <NSTableViewDataSource, QLPreviewPanelDelegate, QLPreviewPanelDataSource>
 
 @end

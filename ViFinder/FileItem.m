@@ -12,20 +12,22 @@
     NSDictionary *fileAttribute;
 }
 
-- (instancetype)initWithFileAttribute:(NSDictionary *)aFileAttribute name:(NSString *)name {
+- (instancetype)initWithName:(NSString *)name fileAttribute:(NSDictionary *)aFileAttribute path:(NSString *)path {
     self = [super init];
     if (self) {
-        fileAttribute = aFileAttribute;
         self.name = name;
+        fileAttribute = aFileAttribute;
+        self.path = [path stringByAppendingFormat:@"/%@", name];
         self.isDirectiory = [[aFileAttribute valueForKey:@"NSFileType"] isEqualToString:NSFileTypeDirectory];
         self.ext = self.isDirectiory ? @"Dir" : [name pathExtension];
+        self.previewItemURL = [NSURL fileURLWithPath:self.path];
     }
 
     return self;
 }
 
-+ (instancetype)itemWithFileAttribute:(NSDictionary *)aFileAttribute name:(NSString *)name {
-    return [[self alloc] initWithFileAttribute:aFileAttribute name:name];
++ (instancetype)itemWithName:(NSString *)name fileAttribute:(NSDictionary *)aFileAttribute path:(NSString *)path {
+    return [[self alloc] initWithName:name fileAttribute:aFileAttribute path:path];
 }
 
 
