@@ -58,20 +58,24 @@
 }
 
 - (void)keyDown:(NSEvent *)theEvent {
-    if (theEvent.keyCode == 38) {
+    if (theEvent.keyCode == kVK_ANSI_J) {
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:self.selectedRow + 1];
         [self selectRowIndexes:indexSet byExtendingSelection:false];
     }
-    if (theEvent.keyCode == 40) {
+    if (theEvent.keyCode == kVK_ANSI_K) {
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:self.selectedRow - 1];
         [self selectRowIndexes:indexSet byExtendingSelection:false];
     }
-    if (theEvent.keyCode == 36) {
+    if (theEvent.keyCode == kVK_Return) {
         NSString *dir = fileArray[(NSUInteger) self.selectedRow];
         if ([currentPath isEqualToString:@"/"]) {
             currentPath = @"";
         }
         currentPath = [currentPath stringByAppendingFormat:@"/%@", dir];
+        [self showPath:currentPath];
+    }
+    if (theEvent.keyCode == kVK_Delete) {
+        currentPath = [currentPath stringByDeletingLastPathComponent];
         [self showPath:currentPath];
     }
 }
