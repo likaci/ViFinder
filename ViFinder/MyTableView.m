@@ -89,4 +89,11 @@
     return [fileManager contentsOfDirectoryAtPath:path error:nil];
 }
 
+- (void)drawRow:(NSInteger)row clipRect:(NSRect)clipRect {
+    NSColor *color = (row % 2) ? [NSColor colorWithCalibratedRed:0.957 green:0.953 blue:0.957 alpha:1.0] : [NSColor whiteColor];
+    [color setFill];
+    NSRectFill([self rectOfRow:row]);
+    [super drawRow:row clipRect:clipRect];
+}
+
 @end
