@@ -8,8 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class MyTableView;
+
 @interface FileViewController : NSViewController <NSTableViewDataSource>
-@property (strong) IBOutlet NSTableView *fileTableView;
+@property (strong) IBOutlet MyTableView *fileTableView;
 
 
 @end
