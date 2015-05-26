@@ -7,8 +7,9 @@
 //
 
 #import "MyTableView.h"
+#import "FileItem.h"
 
-@implementation MyTableView{
+@implementation MyTableView {
     NSFileManager *fileManager;
     NSMutableArray *fileArray;
     NSString *currentPath;
@@ -33,7 +34,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    
+
     // Drawing code here.
 }
 
@@ -54,7 +55,13 @@
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    return fileArray[row];
+    FileItem *item = fileArray[row];
+    if ([[tableColumn identifier] isEqualToString:@"icon"]) {
+        NSImage *folderIcon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)];
+        return folderIcon;
+    } else {
+        return [item valueForKey:[tableColumn identifier]];
+    }
 }
 
 - (void)keyDown:(NSEvent *)theEvent {
@@ -80,8 +87,12 @@
     }
 }
 
--(void)showPath:(NSString*)path {
-    fileArray = [[self getFileListAtPath:path] mutableCopy];
+- (void)showPath:(NSString *)path {
+    [fileArray removeAllObjects];
+    for (NSString *name in [self getFileListAtPath:path]) {
+        [fileArray addObject:[FileItem itemWithName:name icon:@"123"]];
+    }
+    //fileArray = [[self getFileListAtPath:path] mutableCopy];
     [self reloadData];
 }
 
