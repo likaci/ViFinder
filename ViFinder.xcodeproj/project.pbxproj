@@ -13,7 +13,7 @@
 		834325501B0093DA00301A74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8343254F1B0093DA00301A74 /* Images.xcassets */; };
 		834325531B0093DA00301A74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834325511B0093DA00301A74 /* Main.storyboard */; };
 		8343255F1B0093DB00301A74 /* ViFinderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343255E1B0093DB00301A74 /* ViFinderTests.m */; };
-		83FB478F1B017AEC0060AFBE /* MyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FB478E1B017AEC0060AFBE /* MyTableView.m */; };
+		83FB478F1B017AEC0060AFBE /* FileTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FB478E1B017AEC0060AFBE /* FileTableView.m */; };
 		83FB47961B01BEF00060AFBE /* FileItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FB47951B01BEF00060AFBE /* FileItem.m */; };
 /* End PBXBuildFile section */
 
@@ -40,8 +40,8 @@
 		834325581B0093DB00301A74 /* ViFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8343255D1B0093DB00301A74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8343255E1B0093DB00301A74 /* ViFinderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViFinderTests.m; sourceTree = "<group>"; };
-		83FB478D1B017AEC0060AFBE /* MyTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableView.h; sourceTree = "<group>"; };
-		83FB478E1B017AEC0060AFBE /* MyTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableView.m; sourceTree = "<group>"; };
+		83FB478D1B017AEC0060AFBE /* FileTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTableView.h; sourceTree = "<group>"; };
+		83FB478E1B017AEC0060AFBE /* FileTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileTableView.m; sourceTree = "<group>"; };
 		83FB47941B01BEF00060AFBE /* FileItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileItem.h; sourceTree = "<group>"; };
 		83FB47951B01BEF00060AFBE /* FileItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,8 +92,8 @@
 				8343254F1B0093DA00301A74 /* Images.xcassets */,
 				834325511B0093DA00301A74 /* Main.storyboard */,
 				834325451B0093DA00301A74 /* Supporting Files */,
-				83FB478D1B017AEC0060AFBE /* MyTableView.h */,
-				83FB478E1B017AEC0060AFBE /* MyTableView.m */,
+				83FB478D1B017AEC0060AFBE /* FileTableView.h */,
+				83FB478E1B017AEC0060AFBE /* FileTableView.m */,
 				83FB47941B01BEF00060AFBE /* FileItem.h */,
 				83FB47951B01BEF00060AFBE /* FileItem.m */,
 			);
@@ -227,7 +227,7 @@
 			files = (
 				83FB47961B01BEF00060AFBE /* FileItem.m in Sources */,
 				8343254E1B0093DA00301A74 /* FileViewController.m in Sources */,
-				83FB478F1B017AEC0060AFBE /* MyTableView.m in Sources */,
+				83FB478F1B017AEC0060AFBE /* FileTableView.m in Sources */,
 				8343254B1B0093DA00301A74 /* main.m in Sources */,
 				834325491B0093DA00301A74 /* AppDelegate.m in Sources */,
 			);

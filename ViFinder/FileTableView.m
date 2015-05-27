@@ -1,16 +1,16 @@
 //
-//  MyTableView.m
+//  FileTableView.m
 //  ViFinder
 //
 //  Created by liuwencai on 15/5/12.
 //  Copyright (c) 2015年 likaci. All rights reserved.
 //
 
-#import "MyTableView.h"
+#import "FileTableView.h"
 #import "FileItem.h"
 #import "FileViewController.h"
 
-@implementation MyTableView {
+@implementation FileTableView {
     NSFileManager *fileManager;
     NSMutableArray *fileArray;
     NSString *currentPath;

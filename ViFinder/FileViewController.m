@@ -7,12 +7,12 @@
 //
 
 #import "FileViewController.h"
-#import "MyTableView.h"
+#import "FileTableView.h"
 #import "AppDelegate.h"
 
 @implementation FileViewController {
 @private
-    MyTableView *_fileTableView;
+    FileTableView *_fileTableView;
 }
 
 @synthesize fileTableView = _fileTableView;

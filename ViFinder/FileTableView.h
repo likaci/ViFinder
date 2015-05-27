@@ -1,5 +1,5 @@
 //
-//  MyTableView.h
+//  FileTableView.h
 //  ViFinder
 //
 //  Created by liuwencai on 15/5/12.
@@ -10,6 +10,6 @@
 #import <Carbon/Carbon.h>
 #import <Quartz/Quartz.h>
 
-@interface MyTableView : NSTableView <NSTableViewDataSource, QLPreviewPanelDelegate, QLPreviewPanelDataSource>
+@interface FileTableView : NSTableView <NSTableViewDataSource, QLPreviewPanelDelegate, QLPreviewPanelDataSource>
 
 @end
