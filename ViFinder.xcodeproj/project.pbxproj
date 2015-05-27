@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830EFDCC1B0371DB0068C77A /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 830EFDCB1B0371DB0068C77A /* MenuItem.m */; };
 		834325491B0093DA00301A74 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 834325481B0093DA00301A74 /* AppDelegate.m */; };
 		8343254B1B0093DA00301A74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343254A1B0093DA00301A74 /* main.m */; };
 		8343254E1B0093DA00301A74 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343254D1B0093DA00301A74 /* FileViewController.m */; };
@@ -28,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		830EFDCA1B0371DB0068C77A /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
+		830EFDCB1B0371DB0068C77A /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
 		834325421B0093DA00301A74 /* ViFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		834325461B0093DA00301A74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		834325471B0093DA00301A74 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -96,6 +99,8 @@
 				83FB478E1B017AEC0060AFBE /* FileTableView.m */,
 				83FB47941B01BEF00060AFBE /* FileItem.h */,
 				83FB47951B01BEF00060AFBE /* FileItem.m */,
+				830EFDCA1B0371DB0068C77A /* MenuItem.h */,
+				830EFDCB1B0371DB0068C77A /* MenuItem.m */,
 			);
 			path = ViFinder;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 				83FB47961B01BEF00060AFBE /* FileItem.m in Sources */,
 				8343254E1B0093DA00301A74 /* FileViewController.m in Sources */,
 				83FB478F1B017AEC0060AFBE /* FileTableView.m in Sources */,
+				830EFDCC1B0371DB0068C77A /* MenuItem.m in Sources */,
 				8343254B1B0093DA00301A74 /* main.m in Sources */,
 				834325491B0093DA00301A74 /* AppDelegate.m in Sources */,
 			);

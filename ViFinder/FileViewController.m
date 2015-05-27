@@ -9,6 +9,7 @@
 #import "FileViewController.h"
 #import "FileTableView.h"
 #import "FileItem.h"
+#import "MenuItem.h"
 
 @implementation FileViewController {
 @private
@@ -16,6 +17,7 @@
     FileTableView *_fileTableView;
     NSMutableArray *fileArray;
     NSString *currentPath;
+    NSMutableArray *favouriteMenuArray;
 }
 
 @synthesize fileTableView = _fileTableView;
@@ -29,6 +31,8 @@
     _fileTableView.dataSource = self;
     currentPath = @"/";
     [self showPath:currentPath];
+
+    favouriteMenuArray = [[NSMutableArray alloc] init];
 
 }
 
@@ -88,9 +92,26 @@
 
 #pragma mark - FileTableView
 
+
 - (void)showPath:(NSString *)path {
     fileArray = [[self getFileListAtPath:path] mutableCopy];
     [_fileTableView reloadData];
+}
+
+#pragma mark - FavouriteMenu
+
+- (void)addFavouriteHere:(id)sender{
+    NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:currentPath action:@selector(favouriteMenuClick:) keyEquivalent:@""];
+    MenuItem *menuItem = [MenuItem itemWithItem:item name:currentPath path:currentPath];
+    [favouriteMenuArray addObject:menuItem];
+}
+
+- (void)favouriteMenuClick:(id)sender {
+    for (MenuItem *menuItem in favouriteMenuArray) {
+        if (sender == menuItem.item) {
+            [self showPath:menuItem.path];
+        }
+    }
 }
 
 - (NSArray *)getFileListAtPath:(NSString *)path {
@@ -110,6 +131,12 @@
     NSPoint p = [self.view convertPoint:_favouriteMenuButton.frame.origin toView:nil];
     //to screen
     p = [self.view.window convertBaseToScreen:p];
+    [_favouriteMenu removeAllItems];
+    [[_favouriteMenu addItemWithTitle:@"Add Here" action:@selector(addFavouriteHere:) keyEquivalent:@"a"] setKeyEquivalentModifierMask:0];
+    [_favouriteMenu addItem:[NSMenuItem separatorItem]];
+    for (MenuItem *menuItem in favouriteMenuArray) {
+        [_favouriteMenu addItem:menuItem.item];
+    }
     [_favouriteMenu popUpMenuPositioningItem:nil atLocation:p inView:nil];
 }
 
