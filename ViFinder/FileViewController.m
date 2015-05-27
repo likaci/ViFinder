@@ -61,7 +61,7 @@
         currentPath = [currentPath stringByDeletingLastPathComponent];
         [self showPath:currentPath];
     }
-    if (theEvent.keyCode == kVK_Space) {
+    if (theEvent.keyCode == kVK_ANSI_Q) {
         if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
             [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
         }
@@ -69,11 +69,22 @@
             [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:nil];
         }
     }
-    if (theEvent.keyCode == kVK_ANSI_Q) {
+
+    if (theEvent.keyCode == kVK_ANSI_D) {
         [self showFavouriteMenu];
     }
-}
 
+    if (theEvent.keyCode == kVK_Tab) {
+        for (FileViewController *controller in self.parentViewController.childViewControllers) {
+            if (controller != self) {
+                [controller.view.window makeFirstResponder:controller.fileTableView];
+            }
+        }
+        return;
+    }
+
+
+}
 
 #pragma mark - FileTableView
 
