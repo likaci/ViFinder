@@ -8,6 +8,7 @@
 
 #import "MyTableView.h"
 #import "FileItem.h"
+#import "FileViewController.h"
 
 @implementation MyTableView {
     NSFileManager *fileManager;
@@ -85,7 +86,9 @@
         else {
             [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:nil];
         }
-
+    }
+    if (theEvent.keyCode == kVK_ANSI_Q) {
+        [self.parentViewController showFavouriteMenu];
     }
 }
 
@@ -113,7 +116,6 @@
     [super drawRow:row clipRect:clipRect];
 }
 
-
 - (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel {
     return YES;
 }
@@ -131,6 +133,13 @@
 
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
     return fileArray[self.selectedRow];
+}
+
+- (FileViewController *)parentViewController {
+    NSResponder *responder = self;
+    while ([responder isKindOfClass:[NSView class]])
+        responder = [responder nextResponder];
+    return responder;
 }
 
 @end

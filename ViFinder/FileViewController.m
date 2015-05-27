@@ -8,6 +8,7 @@
 
 #import "FileViewController.h"
 #import "MyTableView.h"
+#import "AppDelegate.h"
 
 @implementation FileViewController {
 @private
@@ -23,6 +24,14 @@
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
 
+}
+
+- (void)showFavouriteMenu {
+    //to window
+    NSPoint p = [self.view convertPoint: _favouriteMenuButton.frame.origin toView:nil];
+    //to screen
+    p = [self.view.window convertBaseToScreen:p];
+    [_favouriteMenu popUpMenuPositioningItem:nil atLocation:p inView:nil];
 }
 
 @end

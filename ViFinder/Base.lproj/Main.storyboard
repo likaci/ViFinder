@@ -735,19 +735,46 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Oh-tb-7iS">
+                                <rect key="frame" x="423" y="242" width="63" height="32"/>
+                                <buttonCell key="cell" type="push" title="Fav" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dYh-px-5cl">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <outlet property="menu" destination="VeL-m9-M9h" id="u6a-Sn-bCG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="So0-k3-em0" secondAttribute="bottom" constant="20" symbolic="YES" id="2O9-pm-8b5"/>
-                            <constraint firstAttribute="trailing" secondItem="So0-k3-em0" secondAttribute="trailing" id="DrH-Pn-8ga"/>
-                            <constraint firstItem="So0-k3-em0" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="LMx-6b-Ir3"/>
-                            <constraint firstItem="So0-k3-em0" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="yOt-eV-fjx"/>
+                            <constraint firstItem="4Oh-tb-7iS" firstAttribute="trailing" secondItem="So0-k3-em0" secondAttribute="trailing" id="IJ3-Q2-AN5"/>
+                            <constraint firstItem="So0-k3-em0" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="Ksb-hs-SZK"/>
+                            <constraint firstItem="4Oh-tb-7iS" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="kGz-Eg-i0S"/>
+                            <constraint firstAttribute="bottom" secondItem="So0-k3-em0" secondAttribute="bottom" constant="20" symbolic="YES" id="vIS-VJ-yCQ"/>
+                            <constraint firstAttribute="trailing" secondItem="So0-k3-em0" secondAttribute="trailing" id="wbu-xi-Uoo"/>
+                            <constraint firstItem="So0-k3-em0" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="y9o-Qn-uIe"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="favouriteMenu" destination="VeL-m9-M9h" id="Nvu-co-cFx"/>
+                        <outlet property="favouriteMenuButton" destination="4Oh-tb-7iS" id="3ft-9u-CMm"/>
                         <outlet property="fileTableView" destination="ATE-48-0OA" id="7uS-mp-I8F"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu title="Favourite" id="VeL-m9-M9h">
+                    <items>
+                        <menuItem title="Item 1" id="KKp-cB-qI2">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Item 2" id="TBA-NU-Oeh">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Item 3" id="UNl-vC-SBl">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="564" y="830"/>
         </scene>
