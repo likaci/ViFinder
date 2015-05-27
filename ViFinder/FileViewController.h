@@ -7,10 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <Carbon/Carbon.h>
+#import <Quartz/Quartz.h>
 
 @class FileTableView;
 
-@interface FileViewController : NSViewController <NSTableViewDataSource>
+@interface FileViewController : NSViewController <NSTableViewDataSource, QLPreviewPanelDelegate, QLPreviewPanelDataSource>
 @property (strong) IBOutlet FileTableView *fileTableView;
 @property (strong) IBOutlet NSMenu *favouriteMenu;
 @property (strong) IBOutlet NSButton *favouriteMenuButton;
