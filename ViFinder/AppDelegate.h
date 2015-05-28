@@ -10,6 +10,8 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@property(nonatomic) NSManagedObjectContext * coreDataContext;
+
 
 @end
 

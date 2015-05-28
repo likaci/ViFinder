@@ -99,11 +99,7 @@
 				834325451B0093DA00301A74 /* Supporting Files */,
 				83FB478D1B017AEC0060AFBE /* FileTableView.h */,
 				83FB478E1B017AEC0060AFBE /* FileTableView.m */,
-				83FB47941B01BEF00060AFBE /* FileItem.h */,
-				83FB47951B01BEF00060AFBE /* FileItem.m */,
-				838E45021B043FC7001069EB /* Model.xcdatamodeld */,
-				8389A2E41B04727D006A78F0 /* FavouriteMenuItem.h */,
-				8389A2E51B04727D006A78F0 /* FavouriteMenuItem.m */,
+				8389A2E71B04798F006A78F0 /* Model */,
 			);
 			path = ViFinder;
 			sourceTree = "<group>";
@@ -132,6 +128,18 @@
 				8343255D1B0093DB00301A74 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8389A2E71B04798F006A78F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				838E45021B043FC7001069EB /* Model.xcdatamodeld */,
+				8389A2E41B04727D006A78F0 /* FavouriteMenuItem.h */,
+				8389A2E51B04727D006A78F0 /* FavouriteMenuItem.m */,
+				83FB47941B01BEF00060AFBE /* FileItem.h */,
+				83FB47951B01BEF00060AFBE /* FileItem.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

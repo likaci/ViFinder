@@ -10,6 +10,7 @@
 #import "FileTableView.h"
 #import "FileItem.h"
 #import "FavouriteMenuItem.h"
+#import "AppDelegate.h"
 
 @implementation FileViewController {
 @private
@@ -35,7 +36,6 @@
     [self showPath:currentPath];
 
     favouriteMenuArray = [[NSMutableArray alloc] init];
-
 
 
 }
@@ -96,21 +96,9 @@
 
 #pragma mark - FavouriteMenu
 
-- (NSManagedObjectContext *)favouriteMenuCoreDataContext {
-    if (_favouriteMenuCoreDataContext == nil) {
-        NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
-        NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-        NSString *docs = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        NSURL *url = [NSURL fileURLWithPath:[docs stringByAppendingPathComponent:@"person.xml"]];
-        NSError *error = nil;
-        NSPersistentStore *store = [psc addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error];
-        if (store == nil) {
-            [NSException raise:@"添加数据库错误" format:@"%@", [error localizedDescription]];
-        }
-        _favouriteMenuCoreDataContext = [[NSManagedObjectContext alloc] init];
-        _favouriteMenuCoreDataContext.persistentStoreCoordinator = psc;
-    }
-    return _favouriteMenuCoreDataContext;
+- (NSManagedObjectContext *)coreDataContext {
+    AppDelegate *appDelegate = (AppDelegate*) [[NSApplication sharedApplication] delegate];
+    return appDelegate.coreDataContext;
 }
 
 - (void)showFavouriteMenu {
@@ -125,21 +113,41 @@
     [_favouriteMenu addItem:[NSMenuItem separatorItem]];
 
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    request.entity = [NSEntityDescription entityForName:@"FavouriteMenuItem" inManagedObjectContext:self.favouriteMenuCoreDataContext];
-    NSArray *objs = [self.favouriteMenuCoreDataContext executeFetchRequest:request error:nil];
+    request.entity = [NSEntityDescription entityForName:@"FavouriteMenuItem" inManagedObjectContext:self.coreDataContext];
+    NSArray *objs = [self.coreDataContext executeFetchRequest:request error:nil];
     favouriteMenuArray = [objs mutableCopy];
     for (FavouriteMenuItem *menuItem in favouriteMenuArray) {
+        menuItem.menuItem.menu = nil;
         [_favouriteMenu addItem:menuItem.menuItem];
+    }
+    for (FavouriteMenuItem *menuItem in favouriteMenuArray) {
+        if ([menuItem.path isEqualToString:currentPath]) {
+            [_favouriteMenu addItem:[NSMenuItem separatorItem]];
+            [_favouriteMenu addItemWithTitle:@"Remove Here" action:@selector(removeFavouriteHere:) keyEquivalent:@"d"];
+            break;
+        }
     }
     [_favouriteMenu popUpMenuPositioningItem:nil atLocation:p inView:nil];
 }
 
 - (void)addFavouriteHere:(id)sender {
-    FavouriteMenuItem *favouriteMenuItem = [NSEntityDescription insertNewObjectForEntityForName:@"FavouriteMenuItem" inManagedObjectContext:self.favouriteMenuCoreDataContext];
+    FavouriteMenuItem *favouriteMenuItem = [NSEntityDescription insertNewObjectForEntityForName:@"FavouriteMenuItem" inManagedObjectContext:self.coreDataContext];
     favouriteMenuItem.name = currentPath;
     favouriteMenuItem.path = currentPath;
     favouriteMenuItem.shortcut = @"";
-    [self.favouriteMenuCoreDataContext save:nil];
+    [self.coreDataContext save:nil];
+}
+
+- (void)removeFavouriteHere:(id)sender {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = [NSEntityDescription entityForName:@"FavouriteMenuItem" inManagedObjectContext:self.coreDataContext];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@", currentPath];
+    request.predicate = predicate;
+    NSArray *objs = [self.coreDataContext executeFetchRequest:request error:nil];
+    for (NSManagedObject *obj in objs) {
+        [self.coreDataContext deleteObject:obj];
+    }
+    [self.coreDataContext save:nil];
 }
 
 - (void)favouriteMenuClick:(id)sender {
@@ -153,6 +161,7 @@
 #pragma mark - FileTableView
 
 - (void)showPath:(NSString *)path {
+    currentPath = path;
     fileArray = [[self getFileListAtPath:path] mutableCopy];
     [_fileTableView reloadData];
 }
