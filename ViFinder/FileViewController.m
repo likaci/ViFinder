@@ -9,7 +9,7 @@
 #import "FileViewController.h"
 #import "FileTableView.h"
 #import "FileItem.h"
-#import "MenuItem.h"
+#import "FavouriteMenuItem.h"
 
 @implementation FileViewController {
 @private
@@ -18,6 +18,8 @@
     NSMutableArray *fileArray;
     NSString *currentPath;
     NSMutableArray *favouriteMenuArray;
+    NSManagedObjectContext *_favouriteMenuCoreDataContext;
+
 }
 
 @synthesize fileTableView = _fileTableView;
@@ -33,6 +35,8 @@
     [self showPath:currentPath];
 
     favouriteMenuArray = [[NSMutableArray alloc] init];
+
+
 
 }
 
@@ -90,28 +94,67 @@
 
 }
 
-#pragma mark - FileTableView
+#pragma mark - FavouriteMenu
 
+- (NSManagedObjectContext *)favouriteMenuCoreDataContext {
+    if (_favouriteMenuCoreDataContext == nil) {
+        NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
+        NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+        NSString *docs = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSURL *url = [NSURL fileURLWithPath:[docs stringByAppendingPathComponent:@"person.xml"]];
+        NSError *error = nil;
+        NSPersistentStore *store = [psc addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error];
+        if (store == nil) {
+            [NSException raise:@"添加数据库错误" format:@"%@", [error localizedDescription]];
+        }
+        _favouriteMenuCoreDataContext = [[NSManagedObjectContext alloc] init];
+        _favouriteMenuCoreDataContext.persistentStoreCoordinator = psc;
+    }
+    return _favouriteMenuCoreDataContext;
+}
+
+- (void)showFavouriteMenu {
+    //to window
+    NSPoint p = [self.view convertPoint:_favouriteMenuButton.frame.origin toView:nil];
+    //to screen
+    p = [self.view.window convertBaseToScreen:p];
+
+    [_favouriteMenu removeAllItems];
+
+    [[_favouriteMenu addItemWithTitle:@"Add Here" action:@selector(addFavouriteHere:) keyEquivalent:@"a"] setKeyEquivalentModifierMask:0];
+    [_favouriteMenu addItem:[NSMenuItem separatorItem]];
+
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = [NSEntityDescription entityForName:@"FavouriteMenuItem" inManagedObjectContext:self.favouriteMenuCoreDataContext];
+    NSArray *objs = [self.favouriteMenuCoreDataContext executeFetchRequest:request error:nil];
+    favouriteMenuArray = [objs mutableCopy];
+    for (FavouriteMenuItem *menuItem in favouriteMenuArray) {
+        [_favouriteMenu addItem:menuItem.menuItem];
+    }
+    [_favouriteMenu popUpMenuPositioningItem:nil atLocation:p inView:nil];
+}
+
+- (void)addFavouriteHere:(id)sender {
+    FavouriteMenuItem *favouriteMenuItem = [NSEntityDescription insertNewObjectForEntityForName:@"FavouriteMenuItem" inManagedObjectContext:self.favouriteMenuCoreDataContext];
+    favouriteMenuItem.name = currentPath;
+    favouriteMenuItem.path = currentPath;
+    favouriteMenuItem.shortcut = @"";
+    [self.favouriteMenuCoreDataContext save:nil];
+}
+
+- (void)favouriteMenuClick:(id)sender {
+    for (FavouriteMenuItem *item in favouriteMenuArray) {
+        if (sender == item.menuItem) {
+            [self showPath:item.path];
+        }
+    }
+}
+
+#pragma mark - FileTableView
 
 - (void)showPath:(NSString *)path {
     fileArray = [[self getFileListAtPath:path] mutableCopy];
     [_fileTableView reloadData];
-}
-
-#pragma mark - FavouriteMenu
-
-- (void)addFavouriteHere:(id)sender{
-    NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:currentPath action:@selector(favouriteMenuClick:) keyEquivalent:@""];
-    MenuItem *menuItem = [MenuItem itemWithItem:item name:currentPath path:currentPath];
-    [favouriteMenuArray addObject:menuItem];
-}
-
-- (void)favouriteMenuClick:(id)sender {
-    for (MenuItem *menuItem in favouriteMenuArray) {
-        if (sender == menuItem.item) {
-            [self showPath:menuItem.path];
-        }
-    }
 }
 
 - (NSArray *)getFileListAtPath:(NSString *)path {
@@ -124,20 +167,6 @@
         [fileList addObject:item];
     }
     return fileList;
-}
-
-- (void)showFavouriteMenu {
-    //to window
-    NSPoint p = [self.view convertPoint:_favouriteMenuButton.frame.origin toView:nil];
-    //to screen
-    p = [self.view.window convertBaseToScreen:p];
-    [_favouriteMenu removeAllItems];
-    [[_favouriteMenu addItemWithTitle:@"Add Here" action:@selector(addFavouriteHere:) keyEquivalent:@"a"] setKeyEquivalentModifierMask:0];
-    [_favouriteMenu addItem:[NSMenuItem separatorItem]];
-    for (MenuItem *menuItem in favouriteMenuArray) {
-        [_favouriteMenu addItem:menuItem.item];
-    }
-    [_favouriteMenu popUpMenuPositioningItem:nil atLocation:p inView:nil];
 }
 
 
