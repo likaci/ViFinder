@@ -11,6 +11,7 @@
 #import "FileItem.h"
 #import "FavouriteMenuItem.h"
 #import "AppDelegate.h"
+#import "AddFavouriteViewController.h"
 
 @implementation FileViewController {
 @private
@@ -131,17 +132,22 @@
 }
 
 - (void)addFavouriteHere:(id)sender {
-    FavouriteMenuItem *favouriteMenuItem = [NSEntityDescription insertNewObjectForEntityForName:@"FavouriteMenuItem" inManagedObjectContext:self.coreDataContext];
-    favouriteMenuItem.name = currentPath;
-    favouriteMenuItem.path = currentPath;
-    favouriteMenuItem.shortcut = @"";
-    [self.coreDataContext save:nil];
+    AddFavouriteViewController *addFavouriteViewController = [self.storyboard instantiateControllerWithIdentifier:@"AddFavouriteViewController"];
+    addFavouriteViewController.path = currentPath;
+    addFavouriteViewController.addFav = ^(NSString *path,NSString *name,NSString *shortcut) {
+        FavouriteMenuItem *favouriteMenuItem = [NSEntityDescription insertNewObjectForEntityForName:@"FavouriteMenuItem" inManagedObjectContext:self.coreDataContext];
+        favouriteMenuItem.name = name;
+        favouriteMenuItem.path = path;
+        favouriteMenuItem.shortcut = shortcut;
+        [self.coreDataContext save:nil];
+    };
+    [self presentViewControllerAsSheet:addFavouriteViewController];
 }
 
 - (void)removeFavouriteHere:(id)sender {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:@"FavouriteMenuItem" inManagedObjectContext:self.coreDataContext];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@", currentPath];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path = %@", currentPath];
     request.predicate = predicate;
     NSArray *objs = [self.coreDataContext executeFetchRequest:request error:nil];
     for (NSManagedObject *obj in objs) {

@@ -661,10 +661,10 @@
             </objects>
             <point key="canvasLocation" x="28" y="246"/>
         </scene>
-        <!--File View Controller-->
+        <!--ViFinder-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="FileViewController" sceneMemberID="viewController">
+                <viewController title="ViFinder" id="XfG-lQ-9wD" customClass="FileViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -759,6 +759,7 @@
                         <outlet property="favouriteMenu" destination="VeL-m9-M9h" id="Nvu-co-cFx"/>
                         <outlet property="favouriteMenuButton" destination="4Oh-tb-7iS" id="3ft-9u-CMm"/>
                         <outlet property="fileTableView" destination="ATE-48-0OA" id="7uS-mp-I8F"/>
+                        <outlet property="sourceItemView" destination="ATE-48-0OA" id="9H0-Mt-FAE"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -778,10 +779,106 @@
             </objects>
             <point key="canvasLocation" x="564" y="830"/>
         </scene>
-        <!--Split View Controller-->
+        <!--Add Fav-->
+        <scene sceneID="PK3-U7-Qz4">
+            <objects>
+                <viewController title="Add Fav" storyboardIdentifier="AddFavouriteViewController" id="ohj-cZ-Eyg" customClass="AddFavouriteViewController" sceneMemberID="viewController">
+                    <view key="view" id="Ysy-py-9pY">
+                        <rect key="frame" x="0.0" y="0.0" width="382" height="187"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aAw-m6-Rd3">
+                                <rect key="frame" x="18" y="150" width="41" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Path: " id="6Um-4L-dTO">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u5Q-0n-Ift">
+                                <rect key="frame" x="18" y="86" width="64" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ShortCut:" id="BVQ-IL-MiO">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jni-GV-l4r">
+                                <rect key="frame" x="18" y="118" width="44" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Name:" id="1vy-GZ-wel">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8bI-UU-pmR">
+                                <rect key="frame" x="88" y="116" width="274" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="XEe-oc-VPA">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="ohj-cZ-Eyg" name="value" keyPath="self.name" id="DnN-yu-KwG"/>
+                                </connections>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y3P-bR-uM8">
+                                <rect key="frame" x="88" y="84" width="274" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="YsE-7p-Z8e">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="ohj-cZ-Eyg" name="value" keyPath="self.shortcut" id="lMw-LH-xa9"/>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EiP-8U-EBf">
+                                <rect key="frame" x="88" y="150" width="276" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="path" id="SSi-sI-oj5">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="ohj-cZ-Eyg" name="value" keyPath="self.path" id="Q1s-yJ-arb"/>
+                                </connections>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NGq-HE-4Hv">
+                                <rect key="frame" x="285" y="13" width="83" height="32"/>
+                                <buttonCell key="cell" type="push" title="Ok" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pd4-Zt-Jdt">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="add:" target="ohj-cZ-Eyg" id="kA1-tU-SYn"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WsG-F2-NYa">
+                                <rect key="frame" x="202" y="13" width="83" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="h8b-0h-YeJ">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dismissController:" target="ohj-cZ-Eyg" id="hR6-sW-8yq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="L8T-WG-V8G" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="gQc-xe-XpT"/>
+            </objects>
+            <point key="canvasLocation" x="1056" y="829.5"/>
+        </scene>
+        <!--ViViFinder-->
         <scene sceneID="Nqt-UQ-vkt">
             <objects>
-                <splitViewController id="pfJ-pD-L69" sceneMemberID="viewController">
+                <splitViewController title="ViViFinder" id="pfJ-pD-L69" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="J8K-Vw-Ly4"/>
                         <splitViewItem id="y6k-N1-VSZ"/>

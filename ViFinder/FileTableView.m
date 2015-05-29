@@ -42,7 +42,7 @@
     NSResponder *responder = self;
     while ([responder isKindOfClass:[NSView class]])
         responder = [responder nextResponder];
-    return responder;
+    return (FileViewController *) responder;
 }
 
 @end

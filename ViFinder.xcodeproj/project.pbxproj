@@ -15,6 +15,7 @@
 		8343255F1B0093DB00301A74 /* ViFinderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343255E1B0093DB00301A74 /* ViFinderTests.m */; };
 		8389A2E61B04727D006A78F0 /* FavouriteMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8389A2E51B04727D006A78F0 /* FavouriteMenuItem.m */; };
 		838E45041B043FC7001069EB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 838E45021B043FC7001069EB /* Model.xcdatamodeld */; };
+		83FB16481B0575F800DAD460 /* AddFavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FB16471B0575F800DAD460 /* AddFavouriteViewController.m */; };
 		83FB478F1B017AEC0060AFBE /* FileTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FB478E1B017AEC0060AFBE /* FileTableView.m */; };
 		83FB47961B01BEF00060AFBE /* FileItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FB47951B01BEF00060AFBE /* FileItem.m */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,8 @@
 		8389A2E41B04727D006A78F0 /* FavouriteMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteMenuItem.h; sourceTree = "<group>"; };
 		8389A2E51B04727D006A78F0 /* FavouriteMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteMenuItem.m; sourceTree = "<group>"; };
 		838E45031B043FC7001069EB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		83FB16461B0575F800DAD460 /* AddFavouriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFavouriteViewController.h; sourceTree = "<group>"; };
+		83FB16471B0575F800DAD460 /* AddFavouriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFavouriteViewController.m; sourceTree = "<group>"; };
 		83FB478D1B017AEC0060AFBE /* FileTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTableView.h; sourceTree = "<group>"; };
 		83FB478E1B017AEC0060AFBE /* FileTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileTableView.m; sourceTree = "<group>"; };
 		83FB47941B01BEF00060AFBE /* FileItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileItem.h; sourceTree = "<group>"; };
@@ -100,6 +103,8 @@
 				83FB478D1B017AEC0060AFBE /* FileTableView.h */,
 				83FB478E1B017AEC0060AFBE /* FileTableView.m */,
 				8389A2E71B04798F006A78F0 /* Model */,
+				83FB16461B0575F800DAD460 /* AddFavouriteViewController.h */,
+				83FB16471B0575F800DAD460 /* AddFavouriteViewController.m */,
 			);
 			path = ViFinder;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 				8343254E1B0093DA00301A74 /* FileViewController.m in Sources */,
 				83FB478F1B017AEC0060AFBE /* FileTableView.m in Sources */,
 				838E45041B043FC7001069EB /* Model.xcdatamodeld in Sources */,
+				83FB16481B0575F800DAD460 /* AddFavouriteViewController.m in Sources */,
 				8343254B1B0093DA00301A74 /* main.m in Sources */,
 				834325491B0093DA00301A74 /* AppDelegate.m in Sources */,
 				8389A2E61B04727D006A78F0 /* FavouriteMenuItem.m in Sources */,
