@@ -17,7 +17,6 @@
 @private
     NSFileManager *fileManager;
     FileTableView *_fileTableView;
-    NSMutableArray *fileArray;
     NSString *currentPath;
     NSMutableArray *favouriteMenuArray;
     NSManagedObjectContext *_favouriteMenuCoreDataContext;
@@ -26,13 +25,13 @@
 
 @synthesize fileTableView = _fileTableView;
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if (fileManager == nil) {
         fileManager = [[NSFileManager alloc] init];
+        fileItems = [[NSMutableArray alloc] init];
     }
-    fileArray = [[NSMutableArray alloc] init];
-    _fileTableView.dataSource = self;
     currentPath = @"/";
     [self showPath:currentPath];
 
@@ -59,7 +58,7 @@
         [_fileTableView selectRowIndexes:indexSet byExtendingSelection:false];
     }
     if (theEvent.keyCode == kVK_Return) {
-        NSString *dir = [fileArray[(NSUInteger) _fileTableView.selectedRow] valueForKey:@"name"];
+        NSString *dir = [fileItems[(NSUInteger) _fileTableView.selectedRow] valueForKey:@"name"];
         if ([currentPath isEqualToString:@"/"]) {
             currentPath = @"";
         }
@@ -100,6 +99,16 @@
 - (NSManagedObjectContext *)coreDataContext {
     AppDelegate *appDelegate = (AppDelegate*) [[NSApplication sharedApplication] delegate];
     return appDelegate.coreDataContext;
+}
+
+- (NSMutableArray *)fileItems {
+    return fileItems;
+}
+
+- (void)setFileItems:(NSMutableArray *)items{
+    if (fileItems == items)
+        return;
+    fileItems = items;
 }
 
 - (void)showFavouriteMenu {
@@ -168,8 +177,7 @@
 
 - (void)showPath:(NSString *)path {
     currentPath = path;
-    fileArray = [[self getFileListAtPath:path] mutableCopy];
-    [_fileTableView reloadData];
+    [self setFileItems: [[self getFileListAtPath:path] mutableCopy]];
 }
 
 - (NSArray *)getFileListAtPath:(NSString *)path {
@@ -183,29 +191,6 @@
     }
     return fileList;
 }
-
-
-#pragma mark - TableViewDataSource
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return fileArray.count;
-}
-
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    FileItem *item = fileArray[row];
-    if ([[tableColumn identifier] isEqualToString:@"icon"]) {
-        NSImage *icon;
-        if (item.isDirectiory) {
-            icon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)];
-        } else {
-            icon = [[NSWorkspace sharedWorkspace] iconForFileType:item.ext];
-        }
-        return icon;
-    } else {
-        return [item valueForKey:[tableColumn identifier]];
-    }
-}
-
 
 #pragma mark - QLPreviewPanel protocol
 
@@ -228,7 +213,7 @@
 }
 
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
-    return fileArray[_fileTableView.selectedRow];
+    return fileItems[_fileTableView.selectedRow];
 }
 
 @end

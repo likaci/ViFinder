@@ -690,6 +690,9 @@
                                                     </tableHeaderCell>
                                                     <imageCell key="dataCell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="kpg-0Q-diI"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="Z8J-fa-Lzs" name="value" keyPath="arrangedObjects.icon" id="aak-na-O9Z"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="name" width="120" minWidth="20" maxWidth="3.4028234663852886e+38" id="Me9-gD-muL" userLabel="name">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
@@ -703,6 +706,9 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="Z8J-fa-Lzs" name="value" keyPath="arrangedObjects.name" id="u90-77-mOr"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="ext" width="64" minWidth="10" maxWidth="3.4028234663852886e+38" id="SZq-AQ-1y1" userLabel="ext">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Ext">
@@ -716,6 +722,9 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="Z8J-fa-Lzs" name="value" keyPath="arrangedObjects.ext" id="hCb-bh-1b6"/>
+                                                    </connections>
                                                 </tableColumn>
                                             </tableColumns>
                                         </tableView>
@@ -763,6 +772,16 @@
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController objectClassName="FileItem" id="Z8J-fa-Lzs" userLabel="FileItems">
+                    <declaredKeys>
+                        <string>icon</string>
+                        <string>name</string>
+                        <string>ext</string>
+                    </declaredKeys>
+                    <connections>
+                        <binding destination="XfG-lQ-9wD" name="contentArray" keyPath="self.fileItems" id="MaY-cq-W9H"/>
+                    </connections>
+                </arrayController>
                 <menu title="Favourite" id="VeL-m9-M9h">
                     <items>
                         <menuItem title="Item 1" id="KKp-cB-qI2">

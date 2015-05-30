@@ -12,11 +12,15 @@
 
 @class FileTableView;
 
-@interface FileViewController : NSViewController <NSTableViewDataSource, QLPreviewPanelDelegate, QLPreviewPanelDataSource>
+@interface FileViewController : NSViewController <QLPreviewPanelDelegate, QLPreviewPanelDataSource>{
+    NSMutableArray *fileItems;
+}
 @property (strong) IBOutlet FileTableView *fileTableView;
 @property (strong) IBOutlet NSMenu *favouriteMenu;
 @property (strong) IBOutlet NSButton *favouriteMenuButton;
 
+
+-(void)setFileItems:(NSMutableArray *)items;
 
 - (void)showFavouriteMenu;
 

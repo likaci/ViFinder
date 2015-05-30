@@ -15,6 +15,7 @@
 @property NSString *ext;
 @property NSURL *previewItemURL;
 @property NSString *path;
+@property NSImage *icon;
 
 - (instancetype)initWithName:(NSString *)name fileAttribute:(NSDictionary *)aFileAttribute path:(NSString *)path;
 

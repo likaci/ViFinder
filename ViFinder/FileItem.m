@@ -12,6 +12,16 @@
     NSDictionary *fileAttribute;
 }
 
+- (NSImage *)icon {
+    NSImage *icon;
+    if (self.isDirectiory) {
+        icon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)];
+    } else {
+        icon = [[NSWorkspace sharedWorkspace] iconForFileType:self.ext];
+    }
+    return icon;
+}
+
 - (instancetype)initWithName:(NSString *)name fileAttribute:(NSDictionary *)aFileAttribute path:(NSString *)path {
     self = [super init];
     if (self) {
