@@ -20,6 +20,7 @@
 @property (strong) IBOutlet NSButton *favouriteMenuButton;
 
 
+@property (strong) IBOutlet NSArrayController *FileItemsArrayContoller;
 -(void)setFileItems:(NSMutableArray *)items;
 
 - (void)showFavouriteMenu;

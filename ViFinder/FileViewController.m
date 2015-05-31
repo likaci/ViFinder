@@ -50,20 +50,15 @@
 
 - (void)keyDown:(NSEvent *)theEvent {
     if (theEvent.keyCode == kVK_ANSI_J) {
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:_fileTableView.selectedRow + 1];
-        [_fileTableView selectRowIndexes:indexSet byExtendingSelection:false];
+        [_FileItemsArrayContoller selectNext:nil];
     }
     if (theEvent.keyCode == kVK_ANSI_K) {
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:_fileTableView.selectedRow - 1];
-        [_fileTableView selectRowIndexes:indexSet byExtendingSelection:false];
+        [_FileItemsArrayContoller selectPrevious:nil];
     }
     if (theEvent.keyCode == kVK_Return) {
-        NSString *dir = [fileItems[(NSUInteger) _fileTableView.selectedRow] valueForKey:@"name"];
-        if ([currentPath isEqualToString:@"/"]) {
-            currentPath = @"";
-        }
-        currentPath = [currentPath stringByAppendingFormat:@"/%@", dir];
-        [self showPath:currentPath];
+        NSString *dir =  [self.FileItemsArrayContoller.selection valueForKeyPath:@"name"];
+        dir = [currentPath stringByAppendingPathComponent:dir];
+        [self showPath:dir];
     }
     if (theEvent.keyCode == kVK_Delete) {
         currentPath = [currentPath stringByDeletingLastPathComponent];
@@ -177,6 +172,7 @@
 
 - (void)showPath:(NSString *)path {
     currentPath = path;
+    _FileItemsArrayContoller.filterPredicate = nil;
     [self setFileItems: [[self getFileListAtPath:path] mutableCopy]];
 }
 
