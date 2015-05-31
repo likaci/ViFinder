@@ -670,7 +670,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="So0-k3-em0">
-                                <rect key="frame" x="0.0" y="20" width="480" height="230"/>
+                                <rect key="frame" x="0.0" y="50" width="480" height="200"/>
                                 <clipView key="contentView" id="YmI-dq-0ZH">
                                     <rect key="frame" x="1" y="17" width="238" height="117"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -754,14 +754,44 @@
                                     <outlet property="menu" destination="VeL-m9-M9h" id="u6a-Sn-bCG"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9fe-Lm-LMe">
+                                <rect key="frame" x="-2" y="0.0" width="484" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="daf-3G-tKV">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k8l-nr-r28">
+                                <rect key="frame" x="0.0" y="20" width="480" height="22"/>
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="s0A-W8-rjY">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </searchFieldCell>
+                                <connections>
+                                    <binding destination="Z8J-fa-Lzs" name="predicate" keyPath="filterPredicate" id="2kF-bI-meM">
+                                        <dictionary key="options">
+                                            <string key="NSDisplayName">predicate</string>
+                                            <string key="NSPredicateFormat">name contains $value</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </searchField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="4Oh-tb-7iS" firstAttribute="trailing" secondItem="So0-k3-em0" secondAttribute="trailing" id="IJ3-Q2-AN5"/>
-                            <constraint firstItem="So0-k3-em0" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="Ksb-hs-SZK"/>
-                            <constraint firstItem="4Oh-tb-7iS" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="kGz-Eg-i0S"/>
-                            <constraint firstAttribute="bottom" secondItem="So0-k3-em0" secondAttribute="bottom" constant="20" symbolic="YES" id="vIS-VJ-yCQ"/>
-                            <constraint firstAttribute="trailing" secondItem="So0-k3-em0" secondAttribute="trailing" id="wbu-xi-Uoo"/>
-                            <constraint firstItem="So0-k3-em0" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="y9o-Qn-uIe"/>
+                            <constraint firstItem="So0-k3-em0" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="29h-Xf-5Cb"/>
+                            <constraint firstItem="k8l-nr-r28" firstAttribute="trailing" secondItem="9fe-Lm-LMe" secondAttribute="trailing" id="6Wz-bD-QPB"/>
+                            <constraint firstItem="k8l-nr-r28" firstAttribute="leading" secondItem="So0-k3-em0" secondAttribute="leading" id="Evd-Ni-V3u"/>
+                            <constraint firstAttribute="bottom" secondItem="k8l-nr-r28" secondAttribute="bottom" constant="20" symbolic="YES" id="IzD-00-wzD"/>
+                            <constraint firstItem="So0-k3-em0" firstAttribute="trailing" secondItem="k8l-nr-r28" secondAttribute="trailing" id="JAk-af-NCF"/>
+                            <constraint firstItem="k8l-nr-r28" firstAttribute="leading" secondItem="9fe-Lm-LMe" secondAttribute="leading" id="Lv9-yN-mF0"/>
+                            <constraint firstItem="4Oh-tb-7iS" firstAttribute="trailing" secondItem="So0-k3-em0" secondAttribute="trailing" id="SGf-dy-plJ"/>
+                            <constraint firstItem="So0-k3-em0" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="VSf-el-PXv"/>
+                            <constraint firstItem="k8l-nr-r28" firstAttribute="top" secondItem="So0-k3-em0" secondAttribute="bottom" constant="8" symbolic="YES" id="ken-e9-Dez"/>
+                            <constraint firstItem="4Oh-tb-7iS" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="m1c-41-f0l"/>
+                            <constraint firstAttribute="bottom" secondItem="9fe-Lm-LMe" secondAttribute="bottom" id="vWc-Ga-yhf"/>
+                            <constraint firstAttribute="trailing" secondItem="k8l-nr-r28" secondAttribute="trailing" id="z4k-M5-csv"/>
                         </constraints>
                     </view>
                     <connections>
