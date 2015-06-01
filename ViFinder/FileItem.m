@@ -22,6 +22,15 @@
     return icon;
 }
 
+- (unsigned long long int)size {
+    return fileAttribute.fileSize;
+}
+
+- (NSDate *)date {
+    return fileAttribute.fileModificationDate;
+}
+
+
 - (instancetype)initWithName:(NSString *)name fileAttribute:(NSDictionary *)aFileAttribute path:(NSString *)path {
     self = [super init];
     if (self) {

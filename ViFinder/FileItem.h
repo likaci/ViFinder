@@ -16,6 +16,8 @@
 @property NSURL *previewItemURL;
 @property NSString *path;
 @property NSImage *icon;
+@property unsigned long long int *size;
+@property NSDate *date;
 
 - (instancetype)initWithName:(NSString *)name fileAttribute:(NSDictionary *)aFileAttribute path:(NSString *)path;
 

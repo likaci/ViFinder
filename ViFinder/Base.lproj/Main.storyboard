@@ -682,19 +682,18 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="icon" width="30" minWidth="30" maxWidth="40" id="AKh-hu-Ba8">
+                                                <tableColumn identifier="icon" editable="NO" width="30" minWidth="30" maxWidth="40" id="AKh-hu-Ba8">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <imageCell key="dataCell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="kpg-0Q-diI"/>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
                                                         <binding destination="Z8J-fa-Lzs" name="value" keyPath="arrangedObjects.icon" id="aak-na-O9Z"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="name" width="120" minWidth="20" maxWidth="3.4028234663852886e+38" id="Me9-gD-muL" userLabel="name">
+                                                <tableColumn identifier="" width="197" minWidth="20" maxWidth="3.4028234663852886e+38" id="Me9-gD-muL" userLabel="name">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -710,7 +709,7 @@
                                                         <binding destination="Z8J-fa-Lzs" name="value" keyPath="arrangedObjects.name" id="u90-77-mOr"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="ext" width="64" minWidth="10" maxWidth="3.4028234663852886e+38" id="SZq-AQ-1y1" userLabel="ext">
+                                                <tableColumn identifier="" width="55" minWidth="10" maxWidth="3.4028234663852886e+38" id="SZq-AQ-1y1" userLabel="ext">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Ext">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -724,6 +723,40 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
                                                         <binding destination="Z8J-fa-Lzs" name="value" keyPath="arrangedObjects.ext" id="hCb-bh-1b6"/>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn width="55" minWidth="10" maxWidth="3.4028234663852886e+38" id="2kB-MP-5f9">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="right" title="Size">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="oV1-b8-t0U">
+                                                        <byteCountFormatter key="formatter" allowsNonnumericFormatting="NO" zeroPadsFractionDigits="YES" id="eF9-vf-O4c"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="Z8J-fa-Lzs" name="value" keyPath="arrangedObjects.size" id="ESp-Cl-QJQ"/>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn width="126" minWidth="10" maxWidth="3.4028234663852886e+38" id="hZC-t4-S0n">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Date">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="fkd-4D-ATx">
+                                                        <dateFormatter key="formatter" formatterBehavior="pre10_4" dateFormat="%Y/%m/%d %I:%M:%S" id="FEe-LW-hVY"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="Z8J-fa-Lzs" name="value" keyPath="arrangedObjects.date" id="Rtg-sw-YRn"/>
                                                     </connections>
                                                 </tableColumn>
                                             </tableColumns>
@@ -780,18 +813,18 @@
                             </searchField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="So0-k3-em0" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="29h-Xf-5Cb"/>
-                            <constraint firstItem="k8l-nr-r28" firstAttribute="trailing" secondItem="9fe-Lm-LMe" secondAttribute="trailing" id="6Wz-bD-QPB"/>
-                            <constraint firstItem="k8l-nr-r28" firstAttribute="leading" secondItem="So0-k3-em0" secondAttribute="leading" id="Evd-Ni-V3u"/>
-                            <constraint firstAttribute="bottom" secondItem="k8l-nr-r28" secondAttribute="bottom" constant="20" symbolic="YES" id="IzD-00-wzD"/>
-                            <constraint firstItem="So0-k3-em0" firstAttribute="trailing" secondItem="k8l-nr-r28" secondAttribute="trailing" id="JAk-af-NCF"/>
-                            <constraint firstItem="k8l-nr-r28" firstAttribute="leading" secondItem="9fe-Lm-LMe" secondAttribute="leading" id="Lv9-yN-mF0"/>
-                            <constraint firstItem="4Oh-tb-7iS" firstAttribute="trailing" secondItem="So0-k3-em0" secondAttribute="trailing" id="SGf-dy-plJ"/>
-                            <constraint firstItem="So0-k3-em0" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="VSf-el-PXv"/>
-                            <constraint firstItem="k8l-nr-r28" firstAttribute="top" secondItem="So0-k3-em0" secondAttribute="bottom" constant="8" symbolic="YES" id="ken-e9-Dez"/>
-                            <constraint firstItem="4Oh-tb-7iS" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="m1c-41-f0l"/>
-                            <constraint firstAttribute="bottom" secondItem="9fe-Lm-LMe" secondAttribute="bottom" id="vWc-Ga-yhf"/>
-                            <constraint firstAttribute="trailing" secondItem="k8l-nr-r28" secondAttribute="trailing" id="z4k-M5-csv"/>
+                            <constraint firstItem="So0-k3-em0" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="1rr-IM-Jsa"/>
+                            <constraint firstItem="So0-k3-em0" firstAttribute="trailing" secondItem="k8l-nr-r28" secondAttribute="trailing" id="6LX-N6-Nn5"/>
+                            <constraint firstItem="9fe-Lm-LMe" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="6wL-nA-t9W"/>
+                            <constraint firstAttribute="bottom" secondItem="k8l-nr-r28" secondAttribute="bottom" constant="20" symbolic="YES" id="7ZE-f2-hMV"/>
+                            <constraint firstItem="k8l-nr-r28" firstAttribute="leading" secondItem="9fe-Lm-LMe" secondAttribute="leading" id="Li4-pr-a1A"/>
+                            <constraint firstItem="9fe-Lm-LMe" firstAttribute="trailing" secondItem="k8l-nr-r28" secondAttribute="trailing" id="S4I-R7-9uk"/>
+                            <constraint firstAttribute="trailing" secondItem="9fe-Lm-LMe" secondAttribute="trailing" id="XGC-a8-xUA"/>
+                            <constraint firstAttribute="bottom" secondItem="9fe-Lm-LMe" secondAttribute="bottom" id="gbn-v6-iFh"/>
+                            <constraint firstItem="k8l-nr-r28" firstAttribute="top" secondItem="So0-k3-em0" secondAttribute="bottom" constant="8" symbolic="YES" id="nQy-Ke-rD7"/>
+                            <constraint firstItem="k8l-nr-r28" firstAttribute="leading" secondItem="So0-k3-em0" secondAttribute="leading" id="s5E-35-uMI"/>
+                            <constraint firstItem="4Oh-tb-7iS" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="sOu-Wi-mJS"/>
+                            <constraint firstItem="4Oh-tb-7iS" firstAttribute="trailing" secondItem="So0-k3-em0" secondAttribute="trailing" id="uL6-gX-Lr6"/>
                         </constraints>
                     </view>
                     <connections>
@@ -808,6 +841,8 @@
                         <string>icon</string>
                         <string>name</string>
                         <string>ext</string>
+                        <string>size</string>
+                        <string>date</string>
                     </declaredKeys>
                     <connections>
                         <binding destination="XfG-lQ-9wD" name="contentArray" keyPath="self.fileItems" id="MaY-cq-W9H"/>
