@@ -76,6 +76,11 @@
     if (theEvent.keyCode == kVK_ANSI_D) {
         [self showFavouriteMenu];
     }
+    if (theEvent.keyCode == kVK_ANSI_X) {
+        for (FileItem *f in _FileItemsArrayContoller.selectedObjects) {
+            [f trashSelf];
+        }
+    }
 
     if (theEvent.keyCode == kVK_Tab) {
         for (FileViewController *controller in self.parentViewController.childViewControllers) {

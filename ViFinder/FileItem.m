@@ -49,5 +49,10 @@
     return [[self alloc] initWithName:name fileAttribute:aFileAttribute path:path];
 }
 
+- (void)trashSelf {
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    [fileManager trashItemAtURL:[[NSURL alloc] initFileURLWithPath:self.path] resultingItemURL:nil error:nil];
+}
+
 
 @end

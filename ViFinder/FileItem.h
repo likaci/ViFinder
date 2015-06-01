@@ -23,5 +23,6 @@
 
 + (instancetype)itemWithName:(NSString *)name fileAttribute:(NSDictionary *)aFileAttribute path:(NSString *)path;
 
+- (void)trashSelf;
 
 @end
