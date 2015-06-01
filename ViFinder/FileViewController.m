@@ -73,6 +73,81 @@
         }
     }
 
+    if (theEvent.keyCode == kVK_ANSI_E) {
+        NSString *iTermNewTab = [NSString stringWithFormat:
+                @"if application \"iTerm\" is running then\n"
+                        "\ttell application \"iTerm\"\n"
+                        "\t\ttry\n"
+                        "\t\t\ttell the first terminal\n"
+                        "\t\t\t\tlaunch session \"Default Session\"\n"
+                        "\t\t\t\ttell the last session\n"
+                        "\t\t\t\t\twrite text \"cd %@\"\n"
+                        "\t\t\t\tend tell\n"
+                        "\t\t\tend tell\n"
+                        "\t\ton error\n"
+                        "\t\t\tset myterm to (make new terminal)\n"
+                        "\t\t\ttell myterm\n"
+                        "\t\t\t\tlaunch session \"Default Session\"\n"
+                        "\t\t\t\ttell the last session\n"
+                        "\t\t\t\t\twrite text \"cd %@\"\n"
+                        "\t\t\t\tend tell\n"
+                        "\t\t\tend tell\n"
+                        "\t\tend try\n"
+                        "\t\tactivate\n"
+                        "\tend tell\n"
+                        "else\n"
+                        "\ttell application \"iTerm\"\n"
+                        "\t\tactivate\n"
+                        "\t\ttell the first terminal\n"
+                        "\t\t\ttell the first session\n"
+                        "\t\t\t\twrite text \"cd %@\"\n"
+                        "\t\t\tend tell\n"
+                        "\t\tend tell\n"
+                        "\tend tell\n"
+                        "end if", currentPath, currentPath, currentPath];
+
+        NSString *iTermNewWindow = [NSString stringWithFormat:
+                @"if application \"iTerm\" is running then\n"
+                        "\ttell application \"iTerm\"\n"
+                        "\t\ttry\n"
+                        "\t\t\tset myterm to (make new terminal)\n"
+                        "\t\t\ttell myterm\n"
+                        "\t\t\t\tlaunch session \"Default Session\"\n"
+                        "\t\t\t\ttell the last session\n"
+                        "\t\t\t\t\twrite text \"cd %@\"\n"
+                        "\t\t\t\tend tell\n"
+                        "\t\t\tend tell\n"
+                        "\t\ton error\n"
+                        "\t\t\tset myterm to (make new terminal)\n"
+                        "\t\t\ttell myterm\n"
+                        "\t\t\t\tlaunch session \"Default Session\"\n"
+                        "\t\t\t\ttell the last session\n"
+                        "\t\t\t\t\twrite text \"cd %@\"\n"
+                        "\t\t\t\tend tell\n"
+                        "\t\t\tend tell\n"
+                        "\t\tend try\n"
+                        "\t\tactivate\n"
+                        "\tend tell\n"
+                        "else\n"
+                        "\ttell application \"iTerm\"\n"
+                        "\t\tactivate\n"
+                        "\t\ttell the first terminal\n"
+                        "\t\t\ttell the first session\n"
+                        "\t\t\t\twrite text \"cd %@\"\n"
+                        "\t\t\tend tell\n"
+                        "\t\tend tell\n"
+                        "\tend tell\n"
+                        "end if", currentPath, currentPath, currentPath];
+
+        NSString *terminalNewWindow = [NSString stringWithFormat:
+                @"tell application \"Terminal\"\n"
+                        "\tdo script \"cd %@\"\n"
+                        "\tactivate\n"
+                        "end tell", currentPath];
+
+        NSAppleScript *script = [[NSAppleScript alloc] initWithSource:terminalNewWindow];
+        [script executeAndReturnError:nil];
+    }
     if (theEvent.keyCode == kVK_ANSI_D) {
         [self showFavouriteMenu];
     }
@@ -97,7 +172,7 @@
 #pragma mark - FavouriteMenu
 
 - (NSManagedObjectContext *)coreDataContext {
-    AppDelegate *appDelegate = (AppDelegate*) [[NSApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
     return appDelegate.coreDataContext;
 }
 
@@ -105,7 +180,7 @@
     return fileItems;
 }
 
-- (void)setFileItems:(NSMutableArray *)items{
+- (void)setFileItems:(NSMutableArray *)items {
     if (fileItems == items)
         return;
     fileItems = items;
@@ -143,7 +218,7 @@
 - (void)addFavouriteHere:(id)sender {
     AddFavouriteViewController *addFavouriteViewController = [self.storyboard instantiateControllerWithIdentifier:@"AddFavouriteViewController"];
     addFavouriteViewController.path = currentPath;
-    addFavouriteViewController.addFav = ^(NSString *path,NSString *name,NSString *shortcut) {
+    addFavouriteViewController.addFav = ^(NSString *path, NSString *name, NSString *shortcut) {
         FavouriteMenuItem *favouriteMenuItem = [NSEntityDescription insertNewObjectForEntityForName:@"FavouriteMenuItem" inManagedObjectContext:self.coreDataContext];
         favouriteMenuItem.name = name;
         favouriteMenuItem.path = path;

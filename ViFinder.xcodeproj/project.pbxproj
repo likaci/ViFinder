@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2646C32BFE6BB49604D8AD58 /* iTermNewWindow.applescript in Sources */ = {isa = PBXBuildFile; fileRef = 2646C970B764F8222149D26C /* iTermNewWindow.applescript */; };
+		2646CCCDCD91083323507EB3 /* iTermNewTab.applescript in Sources */ = {isa = PBXBuildFile; fileRef = 2646CC9150F96E45347D2157 /* iTermNewTab.applescript */; };
 		834325491B0093DA00301A74 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 834325481B0093DA00301A74 /* AppDelegate.m */; };
 		8343254B1B0093DA00301A74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343254A1B0093DA00301A74 /* main.m */; };
 		8343254E1B0093DA00301A74 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343254D1B0093DA00301A74 /* FileViewController.m */; };
@@ -31,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2646C970B764F8222149D26C /* iTermNewWindow.applescript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.applescript; path = iTermNewWindow.applescript; sourceTree = "<group>"; };
+		2646CC9150F96E45347D2157 /* iTermNewTab.applescript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.applescript; path = iTermNewTab.applescript; sourceTree = "<group>"; };
 		834325421B0093DA00301A74 /* ViFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		834325461B0093DA00301A74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		834325471B0093DA00301A74 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 			children = (
 				834325461B0093DA00301A74 /* Info.plist */,
 				8343254A1B0093DA00301A74 /* main.m */,
+				2646C970B764F8222149D26C /* iTermNewWindow.applescript */,
+				2646CC9150F96E45347D2157 /* iTermNewTab.applescript */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -254,6 +260,8 @@
 				8343254B1B0093DA00301A74 /* main.m in Sources */,
 				834325491B0093DA00301A74 /* AppDelegate.m in Sources */,
 				8389A2E61B04727D006A78F0 /* FavouriteMenuItem.m in Sources */,
+				2646C32BFE6BB49604D8AD58 /* iTermNewWindow.applescript in Sources */,
+				2646CCCDCD91083323507EB3 /* iTermNewTab.applescript in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
