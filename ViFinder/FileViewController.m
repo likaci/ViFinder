@@ -205,11 +205,11 @@
 #pragma mark - QLPreviewItem
 
 - (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel {
-    return 1;
+    return _FileItemsArrayContoller.selectedObjects.count;
 }
 
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
-    return fileItems[_fileTableView.selectedRow];
+    return _FileItemsArrayContoller.selectedObjects[(NSUInteger) index];
 }
 
 @end
