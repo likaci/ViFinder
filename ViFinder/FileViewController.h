@@ -9,10 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import <Carbon/Carbon.h>
 #import <Quartz/Quartz.h>
+#import "VDKQueue.h"
 
 @class FileTableView;
 
-@interface FileViewController : NSViewController <QLPreviewPanelDelegate, QLPreviewPanelDataSource>{
+@interface FileViewController : NSViewController <QLPreviewPanelDelegate, QLPreviewPanelDataSource, VDKQueueDelegate>{
     NSMutableArray *fileItems;
 }
 @property (strong) IBOutlet FileTableView *fileTableView;

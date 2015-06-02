@@ -12,6 +12,8 @@
 #import "FavouriteMenuItem.h"
 #import "AppDelegate.h"
 #import "AddFavouriteViewController.h"
+#import "VDKQueue.h"
+
 
 @implementation FileViewController {
 @private
@@ -20,7 +22,7 @@
     NSString *currentPath;
     NSMutableArray *favouriteMenuArray;
     NSManagedObjectContext *_favouriteMenuCoreDataContext;
-
+    VDKQueue *vdkQueue;
 }
 
 @synthesize fileTableView = _fileTableView;
@@ -32,6 +34,7 @@
         fileManager = [[NSFileManager alloc] init];
         fileItems = [[NSMutableArray alloc] init];
     }
+    vdkQueue= [[VDKQueue alloc] init];
     currentPath = @"/";
     [self showPath:currentPath];
 
@@ -254,6 +257,11 @@
     currentPath = path;
     _FileItemsArrayContoller.filterPredicate = nil;
     [self setFileItems: [[self getFileListAtPath:path] mutableCopy]];
+
+    [vdkQueue removeAllPaths];
+    [vdkQueue addPath:currentPath];
+    [vdkQueue setDelegate:self];
+
 }
 
 - (NSArray *)getFileListAtPath:(NSString *)path {
@@ -291,5 +299,10 @@
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
     return _FileItemsArrayContoller.selectedObjects[(NSUInteger) index];
 }
+
+- (void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString *)noteName forPath:(NSString *)fpath {
+    [self showPath:currentPath];
+}
+
 
 @end
