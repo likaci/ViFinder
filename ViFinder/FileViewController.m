@@ -198,6 +198,14 @@
         return;
     }
 
+    if (theEvent.keyCode == kVK_Space) {
+        if ([self.fileItemsArrayContoller.selectedObjects containsObject:self.activeRow]) {
+            [self.fileItemsArrayContoller removeSelectedObjects:@[self.activeRow]];
+        } else {
+            [self.fileItemsArrayContoller addSelectedObjects:@[self.activeRow]];
+        }
+        return;
+    }
 
 }
 
