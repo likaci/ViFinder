@@ -22,10 +22,21 @@
     NSMutableArray *favouriteMenuArray;
     NSManagedObjectContext *_favouriteMenuCoreDataContext;
     VDKQueue *vdkQueue;
+    FileItem *_activeRow;
 }
 
 @synthesize fileTableView = _fileTableView;
 
+- (FileItem *)activeRow {
+    if (_activeRow == nil || ![self.fileItemsArrayContoller.arrangedObjects containsObject:_activeRow]) {
+        _activeRow = [self.fileItemsArrayContoller.arrangedObjects firstObject];
+    }
+    return _activeRow;
+}
+
+- (void)setActiveRow:(FileItem *)activeRow {
+    _activeRow = activeRow;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,7 +44,7 @@
         fileManager = [[NSFileManager alloc] init];
         fileItems = [[NSMutableArray alloc] init];
     }
-    vdkQueue= [[VDKQueue alloc] init];
+    vdkQueue = [[VDKQueue alloc] init];
     currentPath = @"/";
     [self showPath:currentPath];
 
@@ -47,15 +58,26 @@
 
 }
 
-
 #pragma mark - keyboard
 
 - (void)keyDown:(NSEvent *)theEvent {
     if (theEvent.keyCode == kVK_ANSI_J) {
-        [_fileItemsArrayContoller selectNext:nil];
+        NSUInteger index = [_fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
+        if (index == NSNotFound) {
+            self.activeRow = [_fileItemsArrayContoller.arrangedObjects firstObject];
+        } else if (index != ((NSArray *) _fileItemsArrayContoller.arrangedObjects).count - 1) {
+            _activeRow = _fileItemsArrayContoller.arrangedObjects[index + 1];
+            [_fileTableView reloadData];
+        }
     }
     if (theEvent.keyCode == kVK_ANSI_K) {
-        [_fileItemsArrayContoller selectPrevious:nil];
+        NSUInteger index = [_fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
+        if (index == NSNotFound) {
+            self.activeRow = [_fileItemsArrayContoller.arrangedObjects firstObject];
+        } else if (index != 0) {
+            _activeRow = _fileItemsArrayContoller.arrangedObjects[index - 1];
+            [_fileTableView reloadData];
+        }
     }
     if (theEvent.keyCode == kVK_Return) {
         NSString *dir = [self.fileItemsArrayContoller.selection valueForKeyPath:@"name"];
@@ -263,8 +285,7 @@
 - (void)showPath:(NSString *)path {
     currentPath = path;
     _fileItemsArrayContoller.filterPredicate = nil;
-    [self setFileItems: [[self getFileListAtPath:path] mutableCopy]];
-
+    [self setFileItems:[[self getFileListAtPath:path] mutableCopy]];
     [vdkQueue removeAllPaths];
     [vdkQueue addPath:currentPath];
     [vdkQueue setDelegate:self];

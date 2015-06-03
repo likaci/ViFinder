@@ -32,9 +32,12 @@
 }
 
 - (void)drawRow:(NSInteger)row clipRect:(NSRect)clipRect {
-    NSColor *color = (row % 2) ? [NSColor colorWithCalibratedRed:0.957 green:0.953 blue:0.957 alpha:1.0] : [NSColor whiteColor];
-    [color setFill];
-    NSRectFill([self rectOfRow:row]);
+    if (self.parentViewController.activeRow == self.parentViewController.fileItemsArrayContoller.arrangedObjects[row]
+            && [[self window] firstResponder] == self) {
+        NSColor *color = [NSColor redColor];
+        [color setFill];
+        NSFrameRect([self rectOfRow:row]);
+    }
     [super drawRow:row clipRect:clipRect];
 }
 
@@ -43,6 +46,17 @@
     while ([responder isKindOfClass:[NSView class]])
         responder = [responder nextResponder];
     return (FileViewController *) responder;
+}
+
+- (BOOL)becomeFirstResponder {
+    [self reloadData];
+    return [super becomeFirstResponder];
+}
+
+- (BOOL)resignFirstResponder {
+    self.parentViewController.activeRow = nil;
+    [self reloadData];
+    return [super resignFirstResponder];
 }
 
 @end

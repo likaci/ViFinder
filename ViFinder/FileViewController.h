@@ -12,6 +12,7 @@
 #import "VDKQueue.h"
 
 @class FileTableView;
+@class FileItem;
 
 @interface FileViewController : NSViewController <QLPreviewPanelDelegate, QLPreviewPanelDataSource, VDKQueueDelegate> {
     NSMutableArray *fileItems;
@@ -20,6 +21,8 @@
 @property(strong) IBOutlet NSMenu *favouriteMenu;
 @property(strong) IBOutlet NSButton *favouriteMenuButton;
 @property(strong) IBOutlet NSArrayController *fileItemsArrayContoller;
+
+@property FileItem *activeRow;
 
 - (void)setFileItems:(NSMutableArray *)items;
 

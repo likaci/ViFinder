@@ -675,8 +675,8 @@
                                     <rect key="frame" x="1" y="17" width="238" height="117"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" headerView="Yt5-od-SAG" id="ATE-48-0OA" customClass="FileTableView">
-                                            <rect key="frame" x="0.0" y="0.0" width="223" height="19"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" headerView="Yt5-od-SAG" id="ATE-48-0OA" customClass="FileTableView">
+                                            <rect key="frame" x="0.0" y="0.0" width="478" height="19"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -828,15 +828,15 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="fileItemsArrayContoller" destination="Z8J-fa-Lzs" id="N72-pF-ld2"/>
                         <outlet property="favouriteMenu" destination="VeL-m9-M9h" id="Nvu-co-cFx"/>
                         <outlet property="favouriteMenuButton" destination="4Oh-tb-7iS" id="3ft-9u-CMm"/>
+                        <outlet property="fileItemsArrayContoller" destination="Z8J-fa-Lzs" id="N72-pF-ld2"/>
                         <outlet property="fileTableView" destination="ATE-48-0OA" id="7uS-mp-I8F"/>
                         <outlet property="sourceItemView" destination="ATE-48-0OA" id="9H0-Mt-FAE"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController objectClassName="FileItem" id="Z8J-fa-Lzs" userLabel="FileItems">
+                <arrayController objectClassName="FileItem" avoidsEmptySelection="NO" id="Z8J-fa-Lzs" userLabel="FileItemsArrayController">
                     <declaredKeys>
                         <string>icon</string>
                         <string>name</string>
