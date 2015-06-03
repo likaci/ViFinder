@@ -151,6 +151,14 @@
         NSAppleScript *script = [[NSAppleScript alloc] initWithSource:terminalNewWindow];
         [script executeAndReturnError:nil];
     }
+
+    if (theEvent.keyCode == kVK_ANSI_Y) {
+        NSString *name = [_FileItemsArrayContoller.selectedObjects[0] valueForKey:@"name"];
+        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+        [[NSPasteboard generalPasteboard] declareTypes:@[NSPasteboardTypeString] owner:nil];
+        [pasteboard setString:[currentPath stringByAppendingPathComponent:name] forType:NSPasteboardTypeString];
+    }
+
     if (theEvent.keyCode == kVK_ANSI_D) {
         [self showFavouriteMenu];
     }
