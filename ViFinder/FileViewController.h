@@ -13,19 +13,17 @@
 
 @class FileTableView;
 
-@interface FileViewController : NSViewController <QLPreviewPanelDelegate, QLPreviewPanelDataSource, VDKQueueDelegate>{
+@interface FileViewController : NSViewController <QLPreviewPanelDelegate, QLPreviewPanelDataSource, VDKQueueDelegate> {
     NSMutableArray *fileItems;
 }
-@property (strong) IBOutlet FileTableView *fileTableView;
-@property (strong) IBOutlet NSMenu *favouriteMenu;
-@property (strong) IBOutlet NSButton *favouriteMenuButton;
+@property(strong) IBOutlet FileTableView *fileTableView;
+@property(strong) IBOutlet NSMenu *favouriteMenu;
+@property(strong) IBOutlet NSButton *favouriteMenuButton;
+@property(strong) IBOutlet NSArrayController *fileItemsArrayContoller;
 
-
-@property (strong) IBOutlet NSArrayController *FileItemsArrayContoller;
--(void)setFileItems:(NSMutableArray *)items;
+- (void)setFileItems:(NSMutableArray *)items;
 
 - (void)showFavouriteMenu;
-
 
 @end
 

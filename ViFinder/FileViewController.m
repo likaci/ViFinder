@@ -12,7 +12,6 @@
 #import "FavouriteMenuItem.h"
 #import "AppDelegate.h"
 #import "AddFavouriteViewController.h"
-#import "VDKQueue.h"
 
 
 @implementation FileViewController {
@@ -53,13 +52,13 @@
 
 - (void)keyDown:(NSEvent *)theEvent {
     if (theEvent.keyCode == kVK_ANSI_J) {
-        [_FileItemsArrayContoller selectNext:nil];
+        [_fileItemsArrayContoller selectNext:nil];
     }
     if (theEvent.keyCode == kVK_ANSI_K) {
-        [_FileItemsArrayContoller selectPrevious:nil];
+        [_fileItemsArrayContoller selectPrevious:nil];
     }
     if (theEvent.keyCode == kVK_Return) {
-        NSString *dir =  [self.FileItemsArrayContoller.selection valueForKeyPath:@"name"];
+        NSString *dir = [self.fileItemsArrayContoller.selection valueForKeyPath:@"name"];
         dir = [currentPath stringByAppendingPathComponent:dir];
         [self showPath:dir];
     }
@@ -153,7 +152,7 @@
     }
 
     if (theEvent.keyCode == kVK_ANSI_Y) {
-        NSString *name = [_FileItemsArrayContoller.selectedObjects[0] valueForKey:@"name"];
+        NSString *name = [_fileItemsArrayContoller.selectedObjects[0] valueForKey:@"name"];
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         [[NSPasteboard generalPasteboard] declareTypes:@[NSPasteboardTypeString] owner:nil];
         [pasteboard setString:[currentPath stringByAppendingPathComponent:name] forType:NSPasteboardTypeString];
@@ -163,7 +162,7 @@
         [self showFavouriteMenu];
     }
     if (theEvent.keyCode == kVK_ANSI_X) {
-        for (FileItem *f in _FileItemsArrayContoller.selectedObjects) {
+        for (FileItem *f in _fileItemsArrayContoller.selectedObjects) {
             [f trashSelf];
         }
     }
@@ -263,7 +262,7 @@
 
 - (void)showPath:(NSString *)path {
     currentPath = path;
-    _FileItemsArrayContoller.filterPredicate = nil;
+    _fileItemsArrayContoller.filterPredicate = nil;
     [self setFileItems: [[self getFileListAtPath:path] mutableCopy]];
 
     [vdkQueue removeAllPaths];
@@ -301,11 +300,11 @@
 #pragma mark - QLPreviewItem
 
 - (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel {
-    return _FileItemsArrayContoller.selectedObjects.count;
+    return _fileItemsArrayContoller.selectedObjects.count;
 }
 
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
-    return _FileItemsArrayContoller.selectedObjects[(NSUInteger) index];
+    return _fileItemsArrayContoller.selectedObjects[(NSUInteger) index];
 }
 
 - (void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString *)noteName forPath:(NSString *)fpath {

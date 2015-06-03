@@ -828,7 +828,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="FileItemsArrayContoller" destination="Z8J-fa-Lzs" id="N72-pF-ld2"/>
+                        <outlet property="fileItemsArrayContoller" destination="Z8J-fa-Lzs" id="N72-pF-ld2"/>
                         <outlet property="favouriteMenu" destination="VeL-m9-M9h" id="Nvu-co-cFx"/>
                         <outlet property="favouriteMenuButton" destination="4Oh-tb-7iS" id="3ft-9u-CMm"/>
                         <outlet property="fileTableView" destination="ATE-48-0OA" id="7uS-mp-I8F"/>
