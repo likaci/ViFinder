@@ -11,6 +11,7 @@
 #import "FileViewController.h"
 
 @implementation FileTableView {
+    FileViewController *_parentViewController;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
@@ -42,10 +43,13 @@
 }
 
 - (FileViewController *)parentViewController {
-    NSResponder *responder = self;
-    while ([responder isKindOfClass:[NSView class]])
-        responder = [responder nextResponder];
-    return (FileViewController *) responder;
+    if (_parentViewController == nil) {
+        NSResponder *responder = self;
+        while ([responder isKindOfClass:[NSView class]])
+            responder = [responder nextResponder];
+        _parentViewController = (FileViewController *) responder;
+    }
+    return _parentViewController;
 }
 
 - (BOOL)becomeFirstResponder {
@@ -54,9 +58,17 @@
 }
 
 - (BOOL)resignFirstResponder {
-    self.parentViewController.activeRow = nil;
     [self reloadData];
     return [super resignFirstResponder];
+}
+
+- (void)mouseDown:(NSEvent *)theEvent {
+    NSPoint globalLocation = [theEvent locationInWindow];
+    NSPoint localLocation = [self convertPoint:globalLocation fromView:nil];
+    NSInteger mouseDownRow = [self rowAtPoint:localLocation];
+    self.parentViewController.activeRow = self.parentViewController.fileItemsArrayContoller.arrangedObjects[(NSUInteger) mouseDownRow];
+    [self reloadData];
+    [super mouseDown:theEvent];
 }
 
 @end
