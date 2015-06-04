@@ -65,37 +65,49 @@
 }
 
 - (void)mouseDown:(NSEvent *)theEvent {
-    NSPoint downPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    NSInteger mouseDownRow = [self rowAtPoint:downPoint];
-    NSPoint upPoint;
-    NSInteger mouseUpRow;
-    theEvent = [[self window] nextEventMatchingMask:NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-    switch ([theEvent type]) {
-        case NSLeftMouseDragged:
-            [super mouseDown:theEvent];
-            upPoint = [NSEvent mouseLocation];
-            upPoint = [self.window convertScreenToBase:upPoint];
-            upPoint = [self convertPoint:upPoint fromView:nil];
-            mouseUpRow = [self rowAtPoint:upPoint];
-            if (mouseUpRow != mouseDownRow) {
-                self.parentViewController.activeRow = self.parentViewController.fileItemsArrayContoller.arrangedObjects[(NSUInteger) mouseUpRow];
-                [self reloadData];
-            }
-            break;
-        case NSLeftMouseUp:
-            upPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-            mouseUpRow = [self rowAtPoint:upPoint];
-            if (mouseUpRow != mouseDownRow) {
+    if ([theEvent modifierFlags] & NSShiftKeyMask) {
+        //shift Press
+        NSPoint downPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+        NSInteger mouseDownRow = [self rowAtPoint:downPoint];
+        NSInteger activeRow = [self.parentViewController.fileItemsArrayContoller.arrangedObjects indexOfObject:self.parentViewController.activeRow];
+        [self.parentViewController.fileItemsArrayContoller setSelectedObjects:nil];
+        [self.parentViewController.fileItemsArrayContoller addSelectionIndexes:
+                [NSIndexSet indexSetWithIndexesInRange:
+                        NSMakeRange(mouseDownRow > activeRow ? activeRow : mouseDownRow, abs(mouseDownRow - activeRow) + 1)]];
+
+    } else {
+        //normal click
+        NSPoint downPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+        NSInteger mouseDownRow = [self rowAtPoint:downPoint];
+        NSPoint upPoint;
+        NSInteger mouseUpRow;
+        theEvent = [[self window] nextEventMatchingMask:NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+        switch ([theEvent type]) {
+            case NSLeftMouseDragged:
                 [super mouseDown:theEvent];
-            } else {
-                self.parentViewController.activeRow = self.parentViewController.fileItemsArrayContoller.arrangedObjects[(NSUInteger) mouseDownRow];
-                [self reloadData];
-            }
-            break;
-        default:
-            break;
+                upPoint = [NSEvent mouseLocation];
+                upPoint = [self.window convertScreenToBase:upPoint];
+                upPoint = [self convertPoint:upPoint fromView:nil];
+                mouseUpRow = [self rowAtPoint:upPoint];
+                if (mouseUpRow != mouseDownRow) {
+                    self.parentViewController.activeRow = self.parentViewController.fileItemsArrayContoller.arrangedObjects[(NSUInteger) mouseUpRow];
+                    [self reloadData];
+                }
+                break;
+            case NSLeftMouseUp:
+                upPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+                mouseUpRow = [self rowAtPoint:upPoint];
+                if (mouseUpRow != mouseDownRow) {
+                    [super mouseDown:theEvent];
+                } else {
+                    self.parentViewController.activeRow = self.parentViewController.fileItemsArrayContoller.arrangedObjects[(NSUInteger) mouseDownRow];
+                    [self reloadData];
+                }
+                break;
+            default:
+                break;
+        }
     }
-    return;
 }
 
 @end
