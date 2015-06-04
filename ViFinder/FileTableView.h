@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface FileTableView : NSTableView
+@interface FileTableView : NSTableView <NSTableViewDelegate>
 
 @end
