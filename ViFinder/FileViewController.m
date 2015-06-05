@@ -76,9 +76,8 @@
         }
     }
     if (theEvent.keyCode == kVK_Return) {
-        NSString *dir = [self.fileItemsArrayContoller.selection valueForKeyPath:@"name"];
-        dir = [currentPath stringByAppendingPathComponent:dir];
-        [self showPath:dir];
+        NSString *path = [currentPath stringByAppendingPathComponent:self.activeRow.name];
+        [self showPath:path];
     }
     if (theEvent.keyCode == kVK_Delete) {
         currentPath = [currentPath stringByDeletingLastPathComponent];
@@ -170,7 +169,7 @@
     }
 
     if (theEvent.keyCode == kVK_ANSI_Y) {
-        NSString *name = [_fileItemsArrayContoller.selectedObjects[0] valueForKey:@"name"];
+        NSString *name = self.activeRow.name;
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         [[NSPasteboard generalPasteboard] declareTypes:@[NSPasteboardTypeString] owner:nil];
         [pasteboard setString:[currentPath stringByAppendingPathComponent:name] forType:NSPasteboardTypeString];
@@ -325,11 +324,15 @@
 #pragma mark - QLPreviewItem
 
 - (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel {
-    return _fileItemsArrayContoller.selectedObjects.count;
+    return self.fileItemsArrayContoller.selectedObjects.count == 0 ? 1 : self.fileItemsArrayContoller.selectedObjects.count;
 }
 
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
-    return _fileItemsArrayContoller.selectedObjects[(NSUInteger) index];
+    if (self.fileItemsArrayContoller.selectedObjects.count == 0) {
+        return self.activeRow;
+    } else {
+        return _fileItemsArrayContoller.selectedObjects[(NSUInteger) index];
+    }
 }
 
 - (void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString *)noteName forPath:(NSString *)fpath {
