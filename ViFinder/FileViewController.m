@@ -50,6 +50,7 @@
 
     favouriteMenuArray = [[NSMutableArray alloc] init];
 
+    self.searchField.delegate = self;
 
 }
 
@@ -202,6 +203,12 @@
         return;
     }
 
+    if (theEvent.keyCode == kVK_ANSI_Slash) {
+        [self.view.window makeFirstResponder:self.searchField];
+        return;
+    }
+
+
 }
 
 #pragma mark - FavouriteMenu
@@ -337,6 +344,21 @@
 
 - (void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString *)noteName forPath:(NSString *)fpath {
     [self showPath:currentPath];
+}
+
+#pragma mark - SearchField
+
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
+    if (commandSelector == @selector(cancelOperation:) || commandSelector == @selector(insertNewline:)) {
+        NSEvent *theEvent = [NSApp currentEvent];
+        if (theEvent.keyCode == kVK_Escape || theEvent.keyCode == kVK_Return) {
+            [self.view.window makeFirstResponder:self.fileTableView];
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    return NO;
 }
 
 

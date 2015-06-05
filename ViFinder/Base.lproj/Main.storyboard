@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="pfJ-pD-L69">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="pfJ-pD-L69">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
@@ -832,6 +832,7 @@
                         <outlet property="favouriteMenuButton" destination="4Oh-tb-7iS" id="3ft-9u-CMm"/>
                         <outlet property="fileItemsArrayContoller" destination="Z8J-fa-Lzs" id="N72-pF-ld2"/>
                         <outlet property="fileTableView" destination="ATE-48-0OA" id="7uS-mp-I8F"/>
+                        <outlet property="searchField" destination="k8l-nr-r28" id="jBZ-O1-rik"/>
                         <outlet property="sourceItemView" destination="ATE-48-0OA" id="9H0-Mt-FAE"/>
                     </connections>
                 </viewController>

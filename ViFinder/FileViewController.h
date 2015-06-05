@@ -14,13 +14,14 @@
 @class FileTableView;
 @class FileItem;
 
-@interface FileViewController : NSViewController <QLPreviewPanelDelegate, QLPreviewPanelDataSource, VDKQueueDelegate> {
+@interface FileViewController : NSViewController <QLPreviewPanelDelegate, QLPreviewPanelDataSource, VDKQueueDelegate, NSTextFieldDelegate> {
     NSMutableArray *fileItems;
 }
 @property(strong) IBOutlet FileTableView *fileTableView;
 @property(strong) IBOutlet NSMenu *favouriteMenu;
 @property(strong) IBOutlet NSButton *favouriteMenuButton;
 @property(strong) IBOutlet NSArrayController *fileItemsArrayContoller;
+@property(strong) IBOutlet NSSearchField *searchField;
 
 @property FileItem *activeRow;
 
