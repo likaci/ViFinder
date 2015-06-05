@@ -63,18 +63,14 @@
 - (void)keyDown:(NSEvent *)theEvent {
     if (theEvent.keyCode == kVK_ANSI_J) {
         NSUInteger index = [_fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
-        if (index == NSNotFound) {
-            self.activeRow = [_fileItemsArrayContoller.arrangedObjects firstObject];
-        } else if (index != ((NSArray *) _fileItemsArrayContoller.arrangedObjects).count - 1) {
+        if (index != ((NSArray *) _fileItemsArrayContoller.arrangedObjects).count - 1) {
             _activeRow = _fileItemsArrayContoller.arrangedObjects[index + 1];
             [_fileTableView reloadData];
         }
     }
     if (theEvent.keyCode == kVK_ANSI_K) {
         NSUInteger index = [_fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
-        if (index == NSNotFound) {
-            self.activeRow = [_fileItemsArrayContoller.arrangedObjects firstObject];
-        } else if (index != 0) {
+        if (index != 0) {
             _activeRow = _fileItemsArrayContoller.arrangedObjects[index - 1];
             [_fileTableView reloadData];
         }
