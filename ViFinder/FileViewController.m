@@ -37,6 +37,7 @@
 - (void)setActiveRow:(FileItem *)activeRow {
     _activeRow = activeRow;
     [self.fileTableView reloadData];
+    [self.fileTableView scrollRowToVisible:[self.fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow]];
 }
 
 - (void)viewDidLoad {
