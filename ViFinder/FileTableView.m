@@ -91,7 +91,6 @@
                 mouseUpRow = [self rowAtPoint:upPoint];
                 if (mouseUpRow != mouseDownRow) {
                     self.parentViewController.activeRow = self.parentViewController.fileItemsArrayContoller.arrangedObjects[(NSUInteger) mouseUpRow];
-                    [self reloadData];
                 }
                 break;
             case NSLeftMouseUp:
@@ -101,7 +100,6 @@
                     [super mouseDown:theEvent];
                 } else {
                     self.parentViewController.activeRow = self.parentViewController.fileItemsArrayContoller.arrangedObjects[(NSUInteger) mouseDownRow];
-                    [self reloadData];
                 }
                 break;
             default:

@@ -36,6 +36,7 @@
 
 - (void)setActiveRow:(FileItem *)activeRow {
     _activeRow = activeRow;
+    [self.fileTableView reloadData];
 }
 
 - (void)viewDidLoad {
@@ -65,15 +66,13 @@
     if (theEvent.keyCode == kVK_ANSI_J) {
         NSUInteger index = [_fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
         if (index != ((NSArray *) _fileItemsArrayContoller.arrangedObjects).count - 1) {
-            _activeRow = _fileItemsArrayContoller.arrangedObjects[index + 1];
-            [_fileTableView reloadData];
+            self.activeRow = _fileItemsArrayContoller.arrangedObjects[index + 1];
         }
     }
     if (theEvent.keyCode == kVK_ANSI_K) {
         NSUInteger index = [_fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
         if (index != 0) {
-            _activeRow = _fileItemsArrayContoller.arrangedObjects[index - 1];
-            [_fileTableView reloadData];
+            self.activeRow = _fileItemsArrayContoller.arrangedObjects[index - 1];
         }
     }
     if (theEvent.keyCode == kVK_Return) {
