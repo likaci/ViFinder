@@ -213,6 +213,13 @@
         return;
     }
 
+    if (theEvent.keyCode == kVK_ANSI_Backslash) {
+        NSArray *selection = self.fileItemsArrayContoller.selectedObjects;
+        NSMutableOrderedSet *all = [NSMutableOrderedSet orderedSetWithArray:self.fileItemsArrayContoller.arrangedObjects];
+        [all minusSet:[NSSet setWithArray:selection]];
+        [self.fileItemsArrayContoller setSelectedObjects:all.set.allObjects];
+        return;
+    }
 
 }
 
