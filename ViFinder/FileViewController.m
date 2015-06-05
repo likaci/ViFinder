@@ -168,6 +168,11 @@
         [script executeAndReturnError:nil];
     }
 
+    if (theEvent.keyCode == kVK_ANSI_G) {
+        self.activeRow = [self.fileItemsArrayContoller.arrangedObjects lastObject];
+        return;
+    }
+
     if (theEvent.keyCode == kVK_ANSI_Y) {
         NSString *name = self.activeRow.name;
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
