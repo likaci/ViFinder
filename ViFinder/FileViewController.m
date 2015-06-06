@@ -133,31 +133,19 @@
             }
             if ([self.prefix isEqualToString:@"s"]) {
                 if (theEvent.keyCode == kVK_ANSI_N) {
-                    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"name"
-                                                                                 ascending:YES
-                                                                                  selector:@selector(compare:)];
-                    [self.fileItemsArrayContoller setSortDescriptors:@[descriptor]];
+                    [self toggleSortColumn:@"name"];
                     self.prefix = @"";
                 }
                 if (theEvent.keyCode == kVK_ANSI_S) {
-                    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"size"
-                                                                                 ascending:YES
-                                                                                  selector:@selector(compare:)];
-                    [self.fileItemsArrayContoller setSortDescriptors:@[descriptor]];
+                    [self toggleSortColumn:@"size"];
                     self.prefix = @"";
                 }
                 if (theEvent.keyCode == kVK_ANSI_E) {
-                    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"ext"
-                                                                                 ascending:YES
-                                                                                  selector:@selector(compare:)];
-                    [self.fileItemsArrayContoller setSortDescriptors:@[descriptor]];
+                    [self toggleSortColumn:@"ext"];
                     self.prefix = @"";
                 }
                 if (theEvent.keyCode == kVK_ANSI_D) {
-                    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"date"
-                                                                                 ascending:YES
-                                                                                  selector:@selector(compare:)];
-                    [self.fileItemsArrayContoller setSortDescriptors:@[descriptor]];
+                    [self toggleSortColumn:@"date"];
                     self.prefix = @"";
                 }
             }
@@ -322,6 +310,20 @@
 
 - (void)filterList {
     [self.view.window makeFirstResponder:self.searchField];
+}
+
+- (void)toggleSortColumn:(NSString *)name {
+    NSSortDescriptor *descriptor = [self.fileItemsArrayContoller.sortDescriptors firstObject];
+    if ([descriptor.key isEqualToString:name] && descriptor.ascending) {
+        descriptor = [NSSortDescriptor sortDescriptorWithKey:name
+                                                   ascending:NO
+                                                    selector:@selector(compare:)];
+    } else {
+        descriptor = [NSSortDescriptor sortDescriptorWithKey:name
+                                                   ascending:YES
+                                                    selector:@selector(compare:)];
+    }
+    [self.fileItemsArrayContoller setSortDescriptors:@[descriptor]];
 }
 
 #pragma mark - FavouriteMenu
