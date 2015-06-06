@@ -100,6 +100,9 @@
             if (theEvent.keyCode == kVK_ANSI_Y) {
                 [self copyFileName];
             }
+            if (theEvent.keyCode == kVK_ANSI_S) {
+                self.prefix = @"s";
+            }
             if (theEvent.keyCode == kVK_ANSI_D) {
                 [self showFavouriteMenu];
             }
@@ -125,6 +128,36 @@
             if ([self.prefix isEqualToString:@"g"]) {
                 if (theEvent.keyCode == kVK_ANSI_G) {
                     [self gotoTop];
+                    self.prefix = @"";
+                }
+            }
+            if ([self.prefix isEqualToString:@"s"]) {
+                if (theEvent.keyCode == kVK_ANSI_N) {
+                    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                                                 ascending:YES
+                                                                                  selector:@selector(compare:)];
+                    [self.fileItemsArrayContoller setSortDescriptors:@[descriptor]];
+                    self.prefix = @"";
+                }
+                if (theEvent.keyCode == kVK_ANSI_S) {
+                    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"size"
+                                                                                 ascending:YES
+                                                                                  selector:@selector(compare:)];
+                    [self.fileItemsArrayContoller setSortDescriptors:@[descriptor]];
+                    self.prefix = @"";
+                }
+                if (theEvent.keyCode == kVK_ANSI_E) {
+                    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"ext"
+                                                                                 ascending:YES
+                                                                                  selector:@selector(compare:)];
+                    [self.fileItemsArrayContoller setSortDescriptors:@[descriptor]];
+                    self.prefix = @"";
+                }
+                if (theEvent.keyCode == kVK_ANSI_D) {
+                    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"date"
+                                                                                 ascending:YES
+                                                                                  selector:@selector(compare:)];
+                    [self.fileItemsArrayContoller setSortDescriptors:@[descriptor]];
                     self.prefix = @"";
                 }
             }
