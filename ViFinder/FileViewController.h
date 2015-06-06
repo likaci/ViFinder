@@ -22,6 +22,8 @@
 @property(strong) IBOutlet NSButton *favouriteMenuButton;
 @property(strong) IBOutlet NSArrayController *fileItemsArrayContoller;
 @property(strong) IBOutlet NSSearchField *searchField;
+@property int mode;
+@property NSString *prefix;
 
 @property FileItem *activeRow;
 
@@ -30,4 +32,10 @@
 - (void)showFavouriteMenu;
 
 @end
+
+enum {
+    NORMAL = 1,
+    INSERT = 2,
+    VISUAL = 3,
+};
 

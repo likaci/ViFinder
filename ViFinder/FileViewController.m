@@ -54,6 +54,9 @@
 
     self.searchField.delegate = self;
 
+    self.mode = NORMAL;
+    self.prefix = @"";
+
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -64,163 +67,228 @@
 #pragma mark - keyboard
 
 - (void)keyDown:(NSEvent *)theEvent {
-    if (theEvent.keyCode == kVK_ANSI_J) {
-        NSUInteger index = [_fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
-        if (index != ((NSArray *) _fileItemsArrayContoller.arrangedObjects).count - 1) {
-            self.activeRow = _fileItemsArrayContoller.arrangedObjects[index + 1];
-        }
-    }
-    if (theEvent.keyCode == kVK_ANSI_K) {
-        NSUInteger index = [_fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
-        if (index != 0) {
-            self.activeRow = _fileItemsArrayContoller.arrangedObjects[index - 1];
-        }
-    }
-    if (theEvent.keyCode == kVK_Return) {
-        NSString *path = [currentPath stringByAppendingPathComponent:self.activeRow.name];
-        [self showPath:path];
-    }
-    if (theEvent.keyCode == kVK_Delete) {
-        currentPath = [currentPath stringByDeletingLastPathComponent];
-        [self showPath:currentPath];
-    }
-    if (theEvent.keyCode == kVK_ANSI_Q) {
-        if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
-            [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
-        }
-        else {
-            [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:nil];
-        }
-    }
-
-    if (theEvent.keyCode == kVK_ANSI_E) {
-        NSString *iTermNewTab = [NSString stringWithFormat:
-                @"if application \"iTerm\" is running then\n"
-                        "\ttell application \"iTerm\"\n"
-                        "\t\ttry\n"
-                        "\t\t\ttell the first terminal\n"
-                        "\t\t\t\tlaunch session \"Default Session\"\n"
-                        "\t\t\t\ttell the last session\n"
-                        "\t\t\t\t\twrite text \"cd %@\"\n"
-                        "\t\t\t\tend tell\n"
-                        "\t\t\tend tell\n"
-                        "\t\ton error\n"
-                        "\t\t\tset myterm to (make new terminal)\n"
-                        "\t\t\ttell myterm\n"
-                        "\t\t\t\tlaunch session \"Default Session\"\n"
-                        "\t\t\t\ttell the last session\n"
-                        "\t\t\t\t\twrite text \"cd %@\"\n"
-                        "\t\t\t\tend tell\n"
-                        "\t\t\tend tell\n"
-                        "\t\tend try\n"
-                        "\t\tactivate\n"
-                        "\tend tell\n"
-                        "else\n"
-                        "\ttell application \"iTerm\"\n"
-                        "\t\tactivate\n"
-                        "\t\ttell the first terminal\n"
-                        "\t\t\ttell the first session\n"
-                        "\t\t\t\twrite text \"cd %@\"\n"
-                        "\t\t\tend tell\n"
-                        "\t\tend tell\n"
-                        "\tend tell\n"
-                        "end if", currentPath, currentPath, currentPath];
-
-        NSString *iTermNewWindow = [NSString stringWithFormat:
-                @"if application \"iTerm\" is running then\n"
-                        "\ttell application \"iTerm\"\n"
-                        "\t\ttry\n"
-                        "\t\t\tset myterm to (make new terminal)\n"
-                        "\t\t\ttell myterm\n"
-                        "\t\t\t\tlaunch session \"Default Session\"\n"
-                        "\t\t\t\ttell the last session\n"
-                        "\t\t\t\t\twrite text \"cd %@\"\n"
-                        "\t\t\t\tend tell\n"
-                        "\t\t\tend tell\n"
-                        "\t\ton error\n"
-                        "\t\t\tset myterm to (make new terminal)\n"
-                        "\t\t\ttell myterm\n"
-                        "\t\t\t\tlaunch session \"Default Session\"\n"
-                        "\t\t\t\ttell the last session\n"
-                        "\t\t\t\t\twrite text \"cd %@\"\n"
-                        "\t\t\t\tend tell\n"
-                        "\t\t\tend tell\n"
-                        "\t\tend try\n"
-                        "\t\tactivate\n"
-                        "\tend tell\n"
-                        "else\n"
-                        "\ttell application \"iTerm\"\n"
-                        "\t\tactivate\n"
-                        "\t\ttell the first terminal\n"
-                        "\t\t\ttell the first session\n"
-                        "\t\t\t\twrite text \"cd %@\"\n"
-                        "\t\t\tend tell\n"
-                        "\t\tend tell\n"
-                        "\tend tell\n"
-                        "end if", currentPath, currentPath, currentPath];
-
-        NSString *terminalNewWindow = [NSString stringWithFormat:
-                @"tell application \"Terminal\"\n"
-                        "\tdo script \"cd %@\"\n"
-                        "\tactivate\n"
-                        "end tell", currentPath];
-
-        NSAppleScript *script = [[NSAppleScript alloc] initWithSource:terminalNewWindow];
-        [script executeAndReturnError:nil];
-    }
-
-    if (theEvent.keyCode == kVK_ANSI_G) {
-        self.activeRow = [self.fileItemsArrayContoller.arrangedObjects lastObject];
-        return;
-    }
-
-    if (theEvent.keyCode == kVK_ANSI_Y) {
-        NSString *name = self.activeRow.name;
-        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
-        [[NSPasteboard generalPasteboard] declareTypes:@[NSPasteboardTypeString] owner:nil];
-        [pasteboard setString:[currentPath stringByAppendingPathComponent:name] forType:NSPasteboardTypeString];
-    }
-
-    if (theEvent.keyCode == kVK_ANSI_D) {
-        [self showFavouriteMenu];
-    }
-    if (theEvent.keyCode == kVK_ANSI_X) {
-        for (FileItem *f in _fileItemsArrayContoller.selectedObjects) {
-            [f trashSelf];
-        }
-    }
-
-    if (theEvent.keyCode == kVK_Tab) {
-        for (FileViewController *controller in self.parentViewController.childViewControllers) {
-            if (controller != self) {
-                [controller.view.window makeFirstResponder:controller.fileTableView];
+    if (self.mode == NORMAL) {
+        if ([self.prefix isEqualToString:@""]) {
+            //prefix == ""
+            if (theEvent.keyCode == kVK_ANSI_J) {
+                [self nextRow];
+            }
+            if (theEvent.keyCode == kVK_ANSI_K) {
+                [self preRow];
+            }
+            if (theEvent.keyCode == kVK_Return) {
+                [self openActiveRow];
+            }
+            if (theEvent.keyCode == kVK_Delete) {
+                [self openParentDir];
+            }
+            if (theEvent.keyCode == kVK_ANSI_Q) {
+                [self preview];
+            }
+            if (theEvent.keyCode == kVK_ANSI_E) {
+                [self terminalHere];
+            }
+            if (theEvent.keyCode == kVK_ANSI_G) {
+                if ([theEvent modifierFlags] & NSShiftKeyMask) {
+                    //Shift
+                    [self gotoEnd];
+                } else {
+                    self.prefix = @"g";
+                }
+                return;
+            }
+            if (theEvent.keyCode == kVK_ANSI_Y) {
+                [self copyFileName];
+            }
+            if (theEvent.keyCode == kVK_ANSI_D) {
+                [self showFavouriteMenu];
+            }
+            if (theEvent.keyCode == kVK_ANSI_X) {
+                [self trashSeleted];
+            }
+            if (theEvent.keyCode == kVK_Tab) {
+                [self activeAnotherPanel];
+            }
+            if (theEvent.keyCode == kVK_Space) {
+                [self toggleItemSelection];
+            }
+            if (theEvent.keyCode == kVK_ANSI_Slash) {
+                [self filterList];
+            }
+            if (theEvent.keyCode == kVK_ANSI_Backslash) {
+                [self toggleSelection];
             }
         }
-        return;
-    }
 
-    if (theEvent.keyCode == kVK_Space) {
-        if ([self.fileItemsArrayContoller.selectedObjects containsObject:self.activeRow]) {
-            [self.fileItemsArrayContoller removeSelectedObjects:@[self.activeRow]];
-        } else {
-            [self.fileItemsArrayContoller addSelectedObjects:@[self.activeRow]];
+        else {
+            //prefix != ""
+            if ([self.prefix isEqualToString:@"g"]) {
+                if (theEvent.keyCode == kVK_ANSI_G) {
+                    [self gotoTop];
+                    self.prefix = @"";
+                }
+            }
         }
-        return;
     }
 
-    if (theEvent.keyCode == kVK_ANSI_Slash) {
-        [self.view.window makeFirstResponder:self.searchField];
-        return;
-    }
+}
 
-    if (theEvent.keyCode == kVK_ANSI_Backslash) {
-        NSArray *selection = self.fileItemsArrayContoller.selectedObjects;
-        NSMutableOrderedSet *all = [NSMutableOrderedSet orderedSetWithArray:self.fileItemsArrayContoller.arrangedObjects];
-        [all minusSet:[NSSet setWithArray:selection]];
-        [self.fileItemsArrayContoller setSelectedObjects:all.set.allObjects];
-        return;
+- (void)nextRow {
+    NSUInteger index = [_fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
+    if (index != ((NSArray *) _fileItemsArrayContoller.arrangedObjects).count - 1) {
+        self.activeRow = _fileItemsArrayContoller.arrangedObjects[index + 1];
     }
+}
 
+- (void)preRow {
+    NSUInteger index = [_fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
+    if (index != 0) {
+        self.activeRow = _fileItemsArrayContoller.arrangedObjects[index - 1];
+    }
+}
+
+- (void)openActiveRow {
+    NSString *path = [currentPath stringByAppendingPathComponent:self.activeRow.name];
+    [self showPath:path];
+}
+
+- (void)openParentDir {
+    currentPath = [currentPath stringByDeletingLastPathComponent];
+    [self showPath:currentPath];
+}
+
+- (void)preview {
+    if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
+        [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
+    }
+    else {
+        [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:nil];
+    }
+}
+
+- (void)terminalHere {
+    NSString *iTermNewTab = [NSString stringWithFormat:
+            @"if application \"iTerm\" is running then\n"
+                    "\ttell application \"iTerm\"\n"
+                    "\t\ttry\n"
+                    "\t\t\ttell the first terminal\n"
+                    "\t\t\t\tlaunch session \"Default Session\"\n"
+                    "\t\t\t\ttell the last session\n"
+                    "\t\t\t\t\twrite text \"cd %@\"\n"
+                    "\t\t\t\tend tell\n"
+                    "\t\t\tend tell\n"
+                    "\t\ton error\n"
+                    "\t\t\tset myterm to (make new terminal)\n"
+                    "\t\t\ttell myterm\n"
+                    "\t\t\t\tlaunch session \"Default Session\"\n"
+                    "\t\t\t\ttell the last session\n"
+                    "\t\t\t\t\twrite text \"cd %@\"\n"
+                    "\t\t\t\tend tell\n"
+                    "\t\t\tend tell\n"
+                    "\t\tend try\n"
+                    "\t\tactivate\n"
+                    "\tend tell\n"
+                    "else\n"
+                    "\ttell application \"iTerm\"\n"
+                    "\t\tactivate\n"
+                    "\t\ttell the first terminal\n"
+                    "\t\t\ttell the first session\n"
+                    "\t\t\t\twrite text \"cd %@\"\n"
+                    "\t\t\tend tell\n"
+                    "\t\tend tell\n"
+                    "\tend tell\n"
+                    "end if", currentPath, currentPath, currentPath];
+
+    NSString *iTermNewWindow = [NSString stringWithFormat:
+            @"if application \"iTerm\" is running then\n"
+                    "\ttell application \"iTerm\"\n"
+                    "\t\ttry\n"
+                    "\t\t\tset myterm to (make new terminal)\n"
+                    "\t\t\ttell myterm\n"
+                    "\t\t\t\tlaunch session \"Default Session\"\n"
+                    "\t\t\t\ttell the last session\n"
+                    "\t\t\t\t\twrite text \"cd %@\"\n"
+                    "\t\t\t\tend tell\n"
+                    "\t\t\tend tell\n"
+                    "\t\ton error\n"
+                    "\t\t\tset myterm to (make new terminal)\n"
+                    "\t\t\ttell myterm\n"
+                    "\t\t\t\tlaunch session \"Default Session\"\n"
+                    "\t\t\t\ttell the last session\n"
+                    "\t\t\t\t\twrite text \"cd %@\"\n"
+                    "\t\t\t\tend tell\n"
+                    "\t\t\tend tell\n"
+                    "\t\tend try\n"
+                    "\t\tactivate\n"
+                    "\tend tell\n"
+                    "else\n"
+                    "\ttell application \"iTerm\"\n"
+                    "\t\tactivate\n"
+                    "\t\ttell the first terminal\n"
+                    "\t\t\ttell the first session\n"
+                    "\t\t\t\twrite text \"cd %@\"\n"
+                    "\t\t\tend tell\n"
+                    "\t\tend tell\n"
+                    "\tend tell\n"
+                    "end if", currentPath, currentPath, currentPath];
+
+    NSString *terminalNewWindow = [NSString stringWithFormat:
+            @"tell application \"Terminal\"\n"
+                    "\tdo script \"cd %@\"\n"
+                    "\tactivate\n"
+                    "end tell", currentPath];
+
+    NSAppleScript *script = [[NSAppleScript alloc] initWithSource:terminalNewWindow];
+    [script executeAndReturnError:nil];
+}
+
+- (void)copyFileName {
+    NSString *name = self.activeRow.name;
+    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+    [[NSPasteboard generalPasteboard] declareTypes:@[NSPasteboardTypeString] owner:nil];
+    [pasteboard setString:[currentPath stringByAppendingPathComponent:name] forType:NSPasteboardTypeString];
+}
+
+- (void)trashSeleted {
+    for (FileItem *f in _fileItemsArrayContoller.selectedObjects) {
+        [f trashSelf];
+    }
+}
+
+- (void)gotoTop {
+    self.activeRow = [self.fileItemsArrayContoller.arrangedObjects firstObject];
+}
+
+- (void)gotoEnd {
+    self.activeRow = [self.fileItemsArrayContoller.arrangedObjects lastObject];
+}
+
+- (void)toggleItemSelection {
+    if ([self.fileItemsArrayContoller.selectedObjects containsObject:self.activeRow]) {
+        [self.fileItemsArrayContoller removeSelectedObjects:@[self.activeRow]];
+    } else {
+        [self.fileItemsArrayContoller addSelectedObjects:@[self.activeRow]];
+    }
+}
+
+- (void)activeAnotherPanel {
+    for (FileViewController *controller in self.parentViewController.childViewControllers) {
+        if (controller != self) {
+            [controller.view.window makeFirstResponder:controller.fileTableView];
+        }
+    }
+}
+
+- (void)toggleSelection {
+    NSArray *selection = self.fileItemsArrayContoller.selectedObjects;
+    NSMutableOrderedSet *all = [NSMutableOrderedSet orderedSetWithArray:self.fileItemsArrayContoller.arrangedObjects];
+    [all minusSet:[NSSet setWithArray:selection]];
+    [self.fileItemsArrayContoller setSelectedObjects:all.set.allObjects];
+    return;
+}
+
+- (void)filterList {
+    [self.view.window makeFirstResponder:self.searchField];
 }
 
 #pragma mark - FavouriteMenu
