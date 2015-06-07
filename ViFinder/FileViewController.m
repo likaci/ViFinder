@@ -412,13 +412,28 @@
 #pragma mark - FileTableView
 
 - (void)showPath:(NSString *)path {
-    currentPath = path;
-    _fileItemsArrayContoller.filterPredicate = nil;
-    [self setFileItems:[[self getFileListAtPath:path] mutableCopy]];
-    [vdkQueue removeAllPaths];
-    [vdkQueue addPath:currentPath];
-    [vdkQueue setDelegate:self];
+    if ([path isEqualToString:currentPath]) {
+        [self refreshCurrentPath];
+    } else {
+        currentPath = path;
+        _fileItemsArrayContoller.filterPredicate = nil;
+        [self setFileItems:[[self getFileListAtPath:path] mutableCopy]];
+        [vdkQueue removeAllPaths];
+        [vdkQueue addPath:currentPath];
+        [vdkQueue setDelegate:self];
+    }
+}
 
+- (void)refreshCurrentPath {
+    NSInteger preActiveRowIndex = [self.fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
+    [self setFileItems:[[self getFileListAtPath:currentPath] mutableCopy]];
+    if (![self.fileItemsArrayContoller.arrangedObjects containsObject:_activeRow]) {
+        if (preActiveRowIndex > [self.fileItemsArrayContoller.arrangedObjects count] - 1) {
+            self.activeRow = [self.fileItemsArrayContoller.arrangedObjects lastObject];
+        } else {
+            self.activeRow = [[self.fileItemsArrayContoller arrangedObjects] objectAtIndex:(NSUInteger) preActiveRowIndex];
+        }
+    }
 }
 
 - (NSArray *)getFileListAtPath:(NSString *)path {
@@ -462,7 +477,7 @@
 }
 
 - (void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString *)noteName forPath:(NSString *)fpath {
-    [self showPath:currentPath];
+    [self refreshCurrentPath];
 }
 
 #pragma mark - SearchField
