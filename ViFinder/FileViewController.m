@@ -271,8 +271,12 @@
 }
 
 - (void)trashSeleted {
-    for (FileItem *f in _fileItemsArrayContoller.selectedObjects) {
-        [f trashSelf];
+    if (self.fileItemsArrayContoller.selectedObjects.count == 0) {
+        [self.activeRow trashSelf];
+    } else {
+        for (FileItem *f in _fileItemsArrayContoller.selectedObjects) {
+            [f trashSelf];
+        }
     }
 }
 
