@@ -118,6 +118,9 @@
             if (theEvent.keyCode == kVK_ANSI_Slash) {
                 [self filterList];
             }
+            if (theEvent.keyCode == kVK_ANSI_RightBracket) {
+                [self selectSameExtItems];
+            }
             if (theEvent.keyCode == kVK_ANSI_Backslash) {
                 if (theEvent.modifierFlags & NSShiftKeyMask) {
                     [self clearSelection];
@@ -304,6 +307,14 @@
     for (FileViewController *controller in self.parentViewController.childViewControllers) {
         if (controller != self) {
             [controller.view.window makeFirstResponder:controller.fileTableView];
+        }
+    }
+}
+
+- (void)selectSameExtItems {
+    for (FileItem *item in self.fileItemsArrayContoller.arrangedObjects) {
+        if ([item.ext isEqualToString:self.activeRow.ext]) {
+            [self.fileItemsArrayContoller addSelectedObjects:@[item]];
         }
     }
 }
