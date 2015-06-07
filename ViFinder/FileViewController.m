@@ -119,7 +119,11 @@
                 [self filterList];
             }
             if (theEvent.keyCode == kVK_ANSI_Backslash) {
-                [self toggleSelection];
+                if (theEvent.modifierFlags & NSShiftKeyMask) {
+                    [self clearSelection];
+                } else {
+                    [self toggleSelection];
+                }
             }
         }
 
@@ -310,6 +314,10 @@
     [all minusSet:[NSSet setWithArray:selection]];
     [self.fileItemsArrayContoller setSelectedObjects:all.set.allObjects];
     return;
+}
+
+- (void)clearSelection {
+    [self.fileItemsArrayContoller setSelectedObjects:nil];
 }
 
 - (void)filterList {
