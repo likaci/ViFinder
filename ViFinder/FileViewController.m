@@ -179,7 +179,12 @@
 
 - (void)openActiveRow {
     NSString *path = [currentPath stringByAppendingPathComponent:self.activeRow.name];
-    [self showPath:path];
+    if (self.activeRow.isDirectiory) {
+        [self showPath:path];
+    } else {
+        NSWorkspace *workspace = [NSWorkspace sharedWorkspace];
+        [workspace openFile:path];
+    }
 }
 
 - (void)openParentDir {
