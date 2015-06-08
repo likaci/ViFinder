@@ -456,12 +456,10 @@
 - (void)refreshCurrentPath {
     NSInteger preActiveRowIndex = [self.fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
     [self setFileItems:[[self getFileListAtPath:currentPath] mutableCopy]];
-    if (![self.fileItemsArrayContoller.arrangedObjects containsObject:_activeRow]) {
-        if (preActiveRowIndex > [self.fileItemsArrayContoller.arrangedObjects count] - 1) {
-            self.activeRow = [self.fileItemsArrayContoller.arrangedObjects lastObject];
-        } else {
-            self.activeRow = [[self.fileItemsArrayContoller arrangedObjects] objectAtIndex:(NSUInteger) preActiveRowIndex];
-        }
+    if (preActiveRowIndex > [self.fileItemsArrayContoller.arrangedObjects count] - 1) {
+        self.activeRow = [self.fileItemsArrayContoller.arrangedObjects lastObject];
+    } else {
+        self.activeRow = [[self.fileItemsArrayContoller arrangedObjects] objectAtIndex:(NSUInteger) preActiveRowIndex];
     }
 }
 
