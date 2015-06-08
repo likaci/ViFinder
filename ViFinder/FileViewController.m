@@ -183,8 +183,8 @@
 }
 
 - (void)openParentDir {
-    currentPath = [currentPath stringByDeletingLastPathComponent];
-    [self showPath:currentPath];
+    NSString *path = [currentPath stringByDeletingLastPathComponent];
+    [self showPath:path];
 }
 
 - (void)preview {
