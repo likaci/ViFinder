@@ -47,8 +47,7 @@
         fileItems = [[NSMutableArray alloc] init];
     }
     vdkQueue = [[VDKQueue alloc] init];
-    currentPath = @"/";
-    [self showPath:currentPath];
+    [self showPath:@"/"];
 
     favouriteMenuArray = [[NSMutableArray alloc] init];
 
