@@ -166,6 +166,10 @@
                     [self copyToClipBoard];
                     self.prefix = @"";
                 }
+                if (theEvent.keyCode == kVK_ANSI_V) {
+                    [self pasteFromClipboard];
+                    self.prefix = @"";
+                }
             }
             self.prefix = @"";
         }
@@ -388,6 +392,26 @@
         }
     }
     [pasteboard writeObjects:items];
+}
+
+- (void)pasteFromClipboard {
+    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+    NSArray *classes = [NSArray arrayWithObject:[NSURL class]];
+    NSDictionary *options;
+    options = @{NSPasteboardURLReadingFileURLsOnlyKey : @YES};
+    NSArray *urls = [pasteboard readObjectsForClasses:classes options:options];
+    for (NSURL *url in urls) {
+        [fileManager copyItemAtPath:url.path toPath:[currentPath stringByAppendingPathComponent:url.lastPathComponent] error:nil];
+    }
+}
+
+- (BOOL)isCurrentPathContainItem:(NSString *)name {
+    for (FileItem *item in self.fileItems) {
+        if ([item.name isEqualToString:name]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 #pragma mark - FavouriteMenu
