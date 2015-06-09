@@ -865,6 +865,109 @@
             </objects>
             <point key="canvasLocation" x="564" y="830"/>
         </scene>
+        <!--Overwrite File View Controller-->
+        <scene sceneID="jSb-nB-bRu">
+            <objects>
+                <viewController identifier="OverwriteFileViewController" storyboardIdentifier="OverwriteFileViewController" id="CXq-F4-6dT" customClass="OverwriteFileViewController" sceneMemberID="viewController">
+                    <view key="view" id="kR4-yk-KlI">
+                        <rect key="frame" x="0.0" y="0.0" width="451" height="229"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qI5-mu-Doc">
+                                <rect key="frame" x="155" y="46" width="141" height="32"/>
+                                <buttonCell key="cell" type="push" title="OverWrite (O)" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LVT-dt-EZO">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent">o</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="overWrite:" target="CXq-F4-6dT" id="UDd-17-k4E"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9QP-ev-dMr">
+                                <rect key="frame" x="296" y="46" width="141" height="32"/>
+                                <buttonCell key="cell" type="push" title="Skip  (S)" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="u4Y-C9-Zko">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent">s</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="skip:" target="CXq-F4-6dT" id="acW-ey-DLH"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3KV-16-eZt">
+                                <rect key="frame" x="155" y="13" width="141" height="32"/>
+                                <buttonCell key="cell" type="push" title="OverWrite All (A)" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dB1-mH-rwM">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent">a</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="overWriteAll:" target="CXq-F4-6dT" id="HeU-xn-jpw"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rqy-bT-6uM">
+                                <rect key="frame" x="296" y="13" width="141" height="32"/>
+                                <buttonCell key="cell" type="push" title="Skip All  (K)" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vCq-83-0SH">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent">k</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="skipAll:" target="CXq-F4-6dT" id="bcg-lu-y5o"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JKo-PF-ZJX">
+                                <rect key="frame" x="14" y="46" width="141" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel (⎋)" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XEg-XZ-q8p">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="cancel:" target="CXq-F4-6dT" id="TgR-MM-IPu"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rZe-JU-jhr">
+                                <rect key="frame" x="14" y="13" width="141" height="32"/>
+                                <buttonCell key="cell" type="push" title="Rename (R)" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cKD-UX-r25">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent">r</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="rename:" target="CXq-F4-6dT" id="PlM-us-lQF"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z8B-AS-rmg">
+                                <rect key="frame" x="20" y="192" width="177" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="OLD" id="9UE-Jg-uRQ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-Rr-8yo">
+                                <rect key="frame" x="206" y="192" width="227" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="New" id="FaD-m1-OXF">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="sourceName" destination="Z8B-AS-rmg" id="G8u-QX-jlb"/>
+                        <outlet property="targetName" destination="AxA-Rr-8yo" id="9tX-2b-0OL"/>
+                    </connections>
+                </viewController>
+                <customObject id="3Hq-LA-R51" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1505.5" y="850.5"/>
+        </scene>
         <!--Add Fav-->
         <scene sceneID="PK3-U7-Qz4">
             <objects>

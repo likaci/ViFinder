@@ -12,6 +12,7 @@
 #import "FavouriteMenuItem.h"
 #import "AppDelegate.h"
 #import "AddFavouriteViewController.h"
+#import "OverwriteFileViewController.h"
 
 
 @implementation FileViewController {
@@ -400,18 +401,46 @@
     NSDictionary *options;
     options = @{NSPasteboardURLReadingFileURLsOnlyKey : @YES};
     NSArray *urls = [pasteboard readObjectsForClasses:classes options:options];
+    __block BOOL isOverWriteAll = FALSE;
+    __block BOOL isSkipAll = FALSE;
+    NSMutableArray *sheets = [[NSMutableArray alloc] init];
     for (NSURL *url in urls) {
-        [fileManager copyItemAtPath:url.path toPath:[currentPath stringByAppendingPathComponent:url.lastPathComponent] error:nil];
-    }
-}
+        NSString *fileName = url.lastPathComponent;
+        NSString *newPath = [currentPath stringByAppendingPathComponent:fileName];
+        if (!isSkipAll) {
+            if ([fileManager fileExistsAtPath:newPath] && !isOverWriteAll) {
+                OverwriteFileViewController *ofvc = [self.storyboard instantiateControllerWithIdentifier:@"OverwriteFileViewController"];
+                [sheets addObject:ofvc];
+                ofvc.sourcePath = url.path;
+                ofvc.targetPath = newPath;
 
-- (BOOL)isCurrentPathContainItem:(NSString *)name {
-    for (FileItem *item in self.fileItems) {
-        if ([item.name isEqualToString:name]) {
-            return YES;
+                ofvc.overWrite = ^() {
+                    [fileManager removeItemAtPath:newPath error:nil];
+                    [fileManager copyItemAtPath:url.path toPath:newPath error:nil];
+                };
+
+                ofvc.overWriteAll = ^() {
+                    [fileManager removeItemAtPath:newPath error:nil];
+                    [fileManager copyItemAtPath:url.path toPath:newPath error:nil];
+                    isOverWriteAll = TRUE;
+                };
+
+                ofvc.skip = ^() {
+                };
+
+                ofvc.skipAll = ^() {
+                    isSkipAll = TRUE;
+                };
+
+                ofvc.rename = ^() {
+                };
+                [self presentViewControllerAsModalWindow:ofvc];
+                CFRunLoopRun();
+            } else {
+                [fileManager copyItemAtPath:url.path toPath:newPath error:nil];
+            }
         }
     }
-    return NO;
 }
 
 #pragma mark - FavouriteMenu

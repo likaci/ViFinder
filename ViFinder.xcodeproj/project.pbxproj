@@ -15,6 +15,7 @@
 		834325501B0093DA00301A74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8343254F1B0093DA00301A74 /* Images.xcassets */; };
 		834325531B0093DA00301A74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834325511B0093DA00301A74 /* Main.storyboard */; };
 		8343255F1B0093DB00301A74 /* ViFinderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343255E1B0093DB00301A74 /* ViFinderTests.m */; };
+		83558F531B149611008FAB6F /* OverwriteFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83558F521B149611008FAB6F /* OverwriteFileViewController.m */; };
 		8389A2E61B04727D006A78F0 /* FavouriteMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8389A2E51B04727D006A78F0 /* FavouriteMenuItem.m */; };
 		838E45041B043FC7001069EB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 838E45021B043FC7001069EB /* Model.xcdatamodeld */; };
 		83A72DE91B0B76BF0069BC1A /* VDKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A72DE81B0B76BF0069BC1A /* VDKQueue.m */; };
@@ -48,6 +49,8 @@
 		834325581B0093DB00301A74 /* ViFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8343255D1B0093DB00301A74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8343255E1B0093DB00301A74 /* ViFinderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViFinderTests.m; sourceTree = "<group>"; };
+		83558F511B149611008FAB6F /* OverwriteFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverwriteFileViewController.h; sourceTree = "<group>"; };
+		83558F521B149611008FAB6F /* OverwriteFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverwriteFileViewController.m; sourceTree = "<group>"; };
 		8389A2E41B04727D006A78F0 /* FavouriteMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteMenuItem.h; sourceTree = "<group>"; };
 		8389A2E51B04727D006A78F0 /* FavouriteMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteMenuItem.m; sourceTree = "<group>"; };
 		838E45031B043FC7001069EB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 				8389A2E71B04798F006A78F0 /* Model */,
 				83FB16461B0575F800DAD460 /* AddFavouriteViewController.h */,
 				83FB16471B0575F800DAD460 /* AddFavouriteViewController.m */,
+				83558F511B149611008FAB6F /* OverwriteFileViewController.h */,
+				83558F521B149611008FAB6F /* OverwriteFileViewController.m */,
 			);
 			path = ViFinder;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 			files = (
 				83FB47961B01BEF00060AFBE /* FileItem.m in Sources */,
 				8343254E1B0093DA00301A74 /* FileViewController.m in Sources */,
+				83558F531B149611008FAB6F /* OverwriteFileViewController.m in Sources */,
 				83FB478F1B017AEC0060AFBE /* FileTableView.m in Sources */,
 				838E45041B043FC7001069EB /* Model.xcdatamodeld in Sources */,
 				83A72DE91B0B76BF0069BC1A /* VDKQueue.m in Sources */,
