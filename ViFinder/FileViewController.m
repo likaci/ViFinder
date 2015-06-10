@@ -605,7 +605,7 @@
 - (void)refreshCurrentPath {
     NSInteger preActiveRowIndex = [self.fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
     [self setFileItems:[[self getFileListAtPath:self.currentPath] mutableCopy]];
-    if (preActiveRowIndex > [self.fileItemsArrayContoller.arrangedObjects count] - 1) {
+    if (preActiveRowIndex > [self.fileItemsArrayContoller.arrangedObjects count] - 1 || [self.fileItemsArrayContoller.arrangedObjects count] == 0) {
         self.activeRow = [self.fileItemsArrayContoller.arrangedObjects lastObject];
     } else {
         self.activeRow = [[self.fileItemsArrayContoller arrangedObjects] objectAtIndex:(NSUInteger) preActiveRowIndex];
