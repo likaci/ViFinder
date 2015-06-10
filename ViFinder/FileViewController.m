@@ -66,6 +66,16 @@
 
 }
 
+- (NSString *)getOtherPanelPath {
+    FileViewController *controller;
+    for (FileViewController *c in self.parentViewController.childViewControllers) {
+        if (c != self) {
+            controller = c;
+        }
+    }
+    return controller.currentPath;
+}
+
 #pragma mark - keyboard
 
 - (void)keyDown:(NSEvent *)theEvent {
@@ -171,6 +181,10 @@
                 }
                 if (theEvent.keyCode == kVK_ANSI_V) {
                     [self pasteFromClipboard];
+                    self.prefix = @"";
+                }
+                if (theEvent.keyCode == kVK_ANSI_C) {
+                    [self copyToOtherPanel];
                     self.prefix = @"";
                 }
             }
@@ -445,6 +459,55 @@
     }
 }
 
+- (void)copyToOtherPanel {
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    if (self.fileItemsArrayContoller.selectedObjects.count == 0) {
+        [items addObject:self.activeRow];
+    } else {
+        items = [self.fileItemsArrayContoller.selectedObjects mutableCopy];
+    }
+
+    NSString *otherPanelPath = self.getOtherPanelPath;
+    __block BOOL isOverWriteAll = FALSE;
+    __block BOOL isSkipAll = FALSE;
+    for (FileItem *item in items) {
+        NSString *newPath = [otherPanelPath stringByAppendingPathComponent:item.name];
+        if (!isSkipAll) {
+            if ([fileManager fileExistsAtPath:newPath] && !isOverWriteAll) {
+                OverwriteFileViewController *ofvc = [self.storyboard instantiateControllerWithIdentifier:@"OverwriteFileViewController"];
+                ofvc.sourcePath = item.path;
+                ofvc.targetPath = newPath;
+
+                ofvc.overWrite = ^() {
+                    [fileManager removeItemAtPath:newPath error:nil];
+                    [fileManager copyItemAtPath:item.path toPath:newPath error:nil];
+                };
+
+                ofvc.overWriteAll = ^() {
+                    [fileManager removeItemAtPath:newPath error:nil];
+                    [fileManager copyItemAtPath:item.path toPath:newPath error:nil];
+                    isOverWriteAll = TRUE;
+                };
+
+                ofvc.skip = ^() {
+                };
+
+                ofvc.skipAll = ^() {
+                    isSkipAll = TRUE;
+                };
+
+                ofvc.rename = ^() {
+                };
+                [self presentViewControllerAsModalWindow:ofvc];
+                CFRunLoopRun();
+            } else {
+                [fileManager copyItemAtPath:item.path toPath:newPath error:nil];
+            }
+        }
+
+    }
+}
+
 #pragma mark - FavouriteMenu
 
 - (NSManagedObjectContext *)coreDataContext {
@@ -581,7 +644,9 @@
     return self.fileItemsArrayContoller.selectedObjects.count == 0 ? 1 : self.fileItemsArrayContoller.selectedObjects.count;
 }
 
-- (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
+- (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel
+                previewItemAtIndex:
+                        (NSInteger)index {
     if (self.fileItemsArrayContoller.selectedObjects.count == 0) {
         return self.activeRow;
     } else {
@@ -589,13 +654,21 @@
     }
 }
 
-- (void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString *)noteName forPath:(NSString *)fpath {
+- (void)    VDKQueue:(VDKQueue *)queue
+receivedNotification:
+        (NSString *)noteName
+             forPath:
+                     (NSString *)fpath {
     [self refreshCurrentPath];
 }
 
 #pragma mark - SearchField
 
-- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
+- (BOOL)control:(NSControl *)control
+           textView:
+                   (NSTextView *)textView
+doCommandBySelector:
+        (SEL)commandSelector {
     if (commandSelector == @selector(cancelOperation:) || commandSelector == @selector(insertNewline:)) {
         NSEvent *theEvent = [NSApp currentEvent];
         if (theEvent.keyCode == kVK_Escape || theEvent.keyCode == kVK_Return) {
