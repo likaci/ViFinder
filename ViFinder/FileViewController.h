@@ -24,6 +24,7 @@
 @property(strong) IBOutlet NSSearchField *searchField;
 @property int mode;
 @property NSString *prefix;
+@property NSString *currentPath;
 
 @property FileItem *activeRow;
 

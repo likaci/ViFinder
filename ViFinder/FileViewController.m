@@ -19,14 +19,16 @@
 @private
     NSFileManager *fileManager;
     FileTableView *_fileTableView;
-    NSString *currentPath;
     NSMutableArray *favouriteMenuArray;
     NSManagedObjectContext *_favouriteMenuCoreDataContext;
     VDKQueue *vdkQueue;
     FileItem *_activeRow;
+    NSString *_currentPath;
 }
 
 @synthesize fileTableView = _fileTableView;
+
+@synthesize currentPath = _currentPath;
 
 - (FileItem *)activeRow {
     if (_activeRow == nil || ![self.fileItemsArrayContoller.arrangedObjects containsObject:_activeRow]) {
@@ -193,7 +195,7 @@
 }
 
 - (void)openActiveRow {
-    NSString *path = [currentPath stringByAppendingPathComponent:self.activeRow.name];
+    NSString *path = [self.currentPath stringByAppendingPathComponent:self.activeRow.name];
     if (self.activeRow.isDirectiory) {
         [self showPath:path];
     } else {
@@ -203,7 +205,7 @@
 }
 
 - (void)openParentDir {
-    NSString *path = [currentPath stringByDeletingLastPathComponent];
+    NSString *path = [self.currentPath stringByDeletingLastPathComponent];
     [self showPath:path];
 }
 
@@ -247,7 +249,7 @@
                     "\t\t\tend tell\n"
                     "\t\tend tell\n"
                     "\tend tell\n"
-                    "end if", currentPath, currentPath, currentPath];
+                    "end if", self.currentPath, self.currentPath, self.currentPath];
 
     NSString *iTermNewWindow = [NSString stringWithFormat:
             @"if application \"iTerm\" is running then\n"
@@ -280,13 +282,13 @@
                     "\t\t\tend tell\n"
                     "\t\tend tell\n"
                     "\tend tell\n"
-                    "end if", currentPath, currentPath, currentPath];
+                    "end if", self.currentPath, self.currentPath, self.currentPath];
 
     NSString *terminalNewWindow = [NSString stringWithFormat:
             @"tell application \"Terminal\"\n"
                     "\tdo script \"cd %@\"\n"
                     "\tactivate\n"
-                    "end tell", currentPath];
+                    "end tell", self.currentPath];
 
     NSAppleScript *script = [[NSAppleScript alloc] initWithSource:terminalNewWindow];
     [script executeAndReturnError:nil];
@@ -296,7 +298,7 @@
     NSString *name = self.activeRow.name;
     NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
     [[NSPasteboard generalPasteboard] declareTypes:@[NSPasteboardTypeString] owner:nil];
-    [pasteboard setString:[currentPath stringByAppendingPathComponent:name] forType:NSPasteboardTypeString];
+    [pasteboard setString:[self.currentPath stringByAppendingPathComponent:name] forType:NSPasteboardTypeString];
 }
 
 - (void)trashSeleted {
@@ -384,11 +386,11 @@
     [pasteboard clearContents];
     NSMutableArray *items = [[NSMutableArray alloc] init];
     if (self.fileItemsArrayContoller.selectedObjects.count == 0) {
-        NSURL *url = [[NSURL alloc] initFileURLWithPath:[currentPath stringByAppendingPathComponent:self.activeRow.name]];
+        NSURL *url = [[NSURL alloc] initFileURLWithPath:[self.currentPath stringByAppendingPathComponent:self.activeRow.name]];
         [items addObject:url];
     } else {
         for (FileItem *item in self.fileItemsArrayContoller.selectedObjects) {
-            NSURL *url = [[NSURL alloc] initFileURLWithPath:[currentPath stringByAppendingPathComponent:item.name]];
+            NSURL *url = [[NSURL alloc] initFileURLWithPath:[self.currentPath stringByAppendingPathComponent:item.name]];
             [items addObject:url];
         }
     }
@@ -406,7 +408,7 @@
     NSMutableArray *sheets = [[NSMutableArray alloc] init];
     for (NSURL *url in urls) {
         NSString *fileName = url.lastPathComponent;
-        NSString *newPath = [currentPath stringByAppendingPathComponent:fileName];
+        NSString *newPath = [self.currentPath stringByAppendingPathComponent:fileName];
         if (!isSkipAll) {
             if ([fileManager fileExistsAtPath:newPath] && !isOverWriteAll) {
                 OverwriteFileViewController *ofvc = [self.storyboard instantiateControllerWithIdentifier:@"OverwriteFileViewController"];
@@ -480,7 +482,7 @@
         [_favouriteMenu addItem:menuItem.menuItem];
     }
     for (FavouriteMenuItem *menuItem in favouriteMenuArray) {
-        if ([menuItem.path isEqualToString:currentPath]) {
+        if ([menuItem.path isEqualToString:self.currentPath]) {
             [_favouriteMenu addItem:[NSMenuItem separatorItem]];
             [_favouriteMenu addItemWithTitle:@"Remove Here" action:@selector(removeFavouriteHere:) keyEquivalent:@"d"];
             break;
@@ -491,7 +493,7 @@
 
 - (void)addFavouriteHere:(id)sender {
     AddFavouriteViewController *addFavouriteViewController = [self.storyboard instantiateControllerWithIdentifier:@"AddFavouriteViewController"];
-    addFavouriteViewController.path = currentPath;
+    addFavouriteViewController.path = self.currentPath;
     addFavouriteViewController.addFav = ^(NSString *path, NSString *name, NSString *shortcut) {
         FavouriteMenuItem *favouriteMenuItem = [NSEntityDescription insertNewObjectForEntityForName:@"FavouriteMenuItem" inManagedObjectContext:self.coreDataContext];
         favouriteMenuItem.name = name;
@@ -505,7 +507,7 @@
 - (void)removeFavouriteHere:(id)sender {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:@"FavouriteMenuItem" inManagedObjectContext:self.coreDataContext];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path = %@", currentPath];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path = %@", self.currentPath];
     request.predicate = predicate;
     NSArray *objs = [self.coreDataContext executeFetchRequest:request error:nil];
     for (NSManagedObject *obj in objs) {
@@ -525,21 +527,21 @@
 #pragma mark - FileTableView
 
 - (void)showPath:(NSString *)path {
-    if ([path isEqualToString:currentPath]) {
+    if ([path isEqualToString:self.currentPath]) {
         [self refreshCurrentPath];
     } else {
-        currentPath = path;
+        self.currentPath = path;
         _fileItemsArrayContoller.filterPredicate = nil;
         [self setFileItems:[[self getFileListAtPath:path] mutableCopy]];
         [vdkQueue removeAllPaths];
-        [vdkQueue addPath:currentPath];
+        [vdkQueue addPath:self.currentPath];
         [vdkQueue setDelegate:self];
     }
 }
 
 - (void)refreshCurrentPath {
     NSInteger preActiveRowIndex = [self.fileItemsArrayContoller.arrangedObjects indexOfObject:self.activeRow];
-    [self setFileItems:[[self getFileListAtPath:currentPath] mutableCopy]];
+    [self setFileItems:[[self getFileListAtPath:self.currentPath] mutableCopy]];
     if (preActiveRowIndex > [self.fileItemsArrayContoller.arrangedObjects count] - 1) {
         self.activeRow = [self.fileItemsArrayContoller.arrangedObjects lastObject];
     } else {
@@ -553,7 +555,7 @@
     NSString *name;
     while ((name = enumerator.nextObject) != nil) {
         [enumerator skipDescendants];
-        FileItem *item = [FileItem itemWithName:name fileAttribute:enumerator.fileAttributes path:currentPath];
+        FileItem *item = [FileItem itemWithName:name fileAttribute:enumerator.fileAttributes path:self.currentPath];
         [fileList addObject:item];
     }
     return fileList;
