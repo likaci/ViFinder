@@ -109,8 +109,8 @@
             if (theEvent.keyCode == kVK_ANSI_X) {
                 [self trashSeleted];
             }
-            if (theEvent.keyCode == kVK_ANSI_C) {
-                self.prefix = @"c";
+            if (theEvent.keyCode == kVK_ANSI_F) {
+                self.prefix = @"f";
             }
             if (theEvent.keyCode == kVK_Tab) {
                 [self activeAnotherPanel];
@@ -162,8 +162,8 @@
                     self.prefix = @"";
                 }
             }
-            if ([self.prefix isEqualToString:@"c"]) {
-                if (theEvent.keyCode == kVK_ANSI_B) {
+            if ([self.prefix isEqualToString:@"f"]) {
+                if (theEvent.keyCode == kVK_ANSI_F) {
                     [self copyToClipBoard];
                     self.prefix = @"";
                 }
