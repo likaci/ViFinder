@@ -187,6 +187,10 @@
                     [self copyToOtherPanel];
                     self.prefix = @"";
                 }
+                if (theEvent.keyCode == kVK_ANSI_X) {
+                    [self moveToOtherPanel];
+                    self.prefix = @"";
+                }
             }
             self.prefix = @"";
         }
@@ -502,6 +506,58 @@
                 CFRunLoopRun();
             } else {
                 [fileManager copyItemAtPath:item.path toPath:newPath error:nil];
+            }
+        }
+
+    }
+}
+
+- (void)moveToOtherPanel {
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    if (self.fileItemsArrayContoller.selectedObjects.count == 0) {
+        [items addObject:self.activeRow];
+    } else {
+        items = [self.fileItemsArrayContoller.selectedObjects mutableCopy];
+    }
+
+    NSString *otherPanelPath = self.getOtherPanelPath;
+    __block BOOL isOverWriteAll = FALSE;
+    __block BOOL isSkipAll = FALSE;
+    for (FileItem *item in items) {
+        NSString *newPath = [otherPanelPath stringByAppendingPathComponent:item.name];
+        if (!isSkipAll) {
+            if ([fileManager fileExistsAtPath:newPath] && !isOverWriteAll) {
+                OverwriteFileViewController *ofvc = [self.storyboard instantiateControllerWithIdentifier:@"OverwriteFileViewController"];
+                ofvc.sourcePath = item.path;
+                ofvc.targetPath = newPath;
+
+                ofvc.overWrite = ^() {
+                    [fileManager removeItemAtPath:newPath error:nil];
+                    [fileManager copyItemAtPath:item.path toPath:newPath error:nil];
+                    [fileManager removeItemAtPath:item.path error:nil];
+                };
+
+                ofvc.overWriteAll = ^() {
+                    [fileManager removeItemAtPath:newPath error:nil];
+                    [fileManager copyItemAtPath:item.path toPath:newPath error:nil];
+                    [fileManager removeItemAtPath:item.path error:nil];
+                    isOverWriteAll = TRUE;
+                };
+
+                ofvc.skip = ^() {
+                };
+
+                ofvc.skipAll = ^() {
+                    isSkipAll = TRUE;
+                };
+
+                ofvc.rename = ^() {
+                };
+                [self presentViewControllerAsModalWindow:ofvc];
+                CFRunLoopRun();
+            } else {
+                [fileManager copyItemAtPath:item.path toPath:newPath error:nil];
+                [fileManager removeItemAtPath:item.path error:nil];
             }
         }
 
