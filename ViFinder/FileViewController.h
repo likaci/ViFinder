@@ -32,6 +32,7 @@
 
 - (void)showFavouriteMenu;
 
+- (void)showPath:(NSString *)path;
 @end
 
 enum {

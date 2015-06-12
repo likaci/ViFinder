@@ -66,6 +66,17 @@
 
 }
 
+
+- (FileViewController *)getOtherPanel {
+    FileViewController *controller;
+    for (FileViewController *c in self.parentViewController.childViewControllers) {
+        if (c != self) {
+            controller = c;
+        }
+    }
+    return controller;
+}
+
 - (NSString *)getOtherPanelPath {
     FileViewController *controller;
     for (FileViewController *c in self.parentViewController.childViewControllers) {
@@ -82,6 +93,11 @@
     if (self.mode == NORMAL) {
         if ([self.prefix isEqualToString:@""]) {
             //prefix == ""
+            if (theEvent.keyCode == kVK_ANSI_Equal) {
+                [self setOtherPanelPathToCurrent];
+                return;
+            }
+
             if (theEvent.keyCode == kVK_ANSI_J) {
                 [self nextRow];
             }
@@ -196,6 +212,10 @@
         }
     }
 
+}
+
+- (void)setOtherPanelPathToCurrent {
+    [self.getOtherPanel showPath:self.currentPath];
 }
 
 - (void)nextRow {
