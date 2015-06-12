@@ -24,6 +24,7 @@
     VDKQueue *vdkQueue;
     FileItem *_activeRow;
     NSString *_currentPath;
+    FileViewController *_otherPanel;
 }
 
 @synthesize fileTableView = _fileTableView;
@@ -66,25 +67,19 @@
 
 }
 
-
 - (FileViewController *)getOtherPanel {
-    FileViewController *controller;
-    for (FileViewController *c in self.parentViewController.childViewControllers) {
-        if (c != self) {
-            controller = c;
+    if (_otherPanel == nil) {
+        for (FileViewController *c in self.parentViewController.childViewControllers) {
+            if (c != self) {
+                _otherPanel = c;
+            }
         }
     }
-    return controller;
+    return _otherPanel;
 }
 
 - (NSString *)getOtherPanelPath {
-    FileViewController *controller;
-    for (FileViewController *c in self.parentViewController.childViewControllers) {
-        if (c != self) {
-            controller = c;
-        }
-    }
-    return controller.currentPath;
+    return self.getOtherPanel.currentPath;
 }
 
 #pragma mark - keyboard
